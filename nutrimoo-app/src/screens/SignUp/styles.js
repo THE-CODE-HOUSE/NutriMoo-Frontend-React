@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
     textinput: {
       marginTop: 10,
       borderRadius: 20,
-      paddingLeft: 15,
+      paddingLeft: 15, // Este é o padding interno da caixa de texto
       fontSize: 16,
     },
     shadowBox: {
@@ -50,7 +50,8 @@ const styles = StyleSheet.create({
       fontSize: 18,
       color: "#073021",
       fontWeight: "bold",
-      textAlign: "left"
+      alignSelf: 'flex-start',
+      marginLeft: 32.5  
     },
     button: {
       width: "40%",

@@ -13,9 +13,10 @@ import {
 } from "react-native";
 
 import styles from "./styles";
-
+import { CustomDropDown } from "../../components/CustomDropDown";
 import { MaterialIcons } from "@expo/vector-icons";
 import { useState } from "react";
+
 
 const SignUpScreen = () => {
   const [email, setEmail] = useState("");
@@ -51,6 +52,16 @@ const SignUpScreen = () => {
           source={require("../../../assets/images/background.png")}
           style={styles.image}
         >
+          <View style={styles.homeBar}>
+          <TouchableOpacity
+          // Adicione o método navigation aqui
+          style={{ backgroundColor: "transparent" , marginTop: 30, marginLeft:20}}
+        >
+          <MaterialIcons name="arrow-back" size={32} color="#073021" />
+        </TouchableOpacity>
+        </View>
+
+
           <View style={styles.retangulo}>
             <View
               style={[
@@ -83,7 +94,6 @@ const SignUpScreen = () => {
                 autoCorrect={false}
                 keyboardType="nome"
                 onChangeText={(text) => setEmail(text)}
-                value={email}
                 style={styles.textinputWithIcon}
                 maxLength={40}
               />
@@ -104,7 +114,6 @@ const SignUpScreen = () => {
                 autoCorrect={false}
                 keyboardType="email-address"
                 onChangeText={(text) => setEmail(text)}
-                value={email}
                 style={styles.textinputWithIcon}
                 maxLength={40}
               />
@@ -145,31 +154,10 @@ const SignUpScreen = () => {
 
             </View>
 
-            <Text style={styles.contText}>DEPARTAMENTO</Text>
-              <View style={styles.shadowBox}>
-                <TextInput
-                  placeholder="Departamento"
-                  autoCorrect={false}
-                  keyboardType="departamento"
-                  onChangeText={(text) => setEmail(text)}
-                  value={email}
-                  style={styles.textinputWithIcon}
-                  maxLength={40}
-                />
-              </View>
 
-              <Text style={styles.contText}>FUNÇÃO</Text>
-              <View style={styles.shadowBox}>
-                <TextInput
-                  placeholder="funcao"
-                  autoCorrect={false}
-                  keyboardType="funcao"
-                  onChangeText={(text) => setEmail(text)}
-                  value={email}
-                  style={styles.textinputWithIcon}
-                  maxLength={40}
-                />
-              </View>
+            <CustomDropDown title={'DEPARTAMENTO'} zIndex={2000} titleColor={'#073021'} />
+
+            <CustomDropDown title={'FUNÇÃO'} zIndex={2000} titleColor={'#073021'} />
 
               {errorMessage ? (
               <Text style={{ color: "red", marginTop: 10, fontWeight: "400" }}>
