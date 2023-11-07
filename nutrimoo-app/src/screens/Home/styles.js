@@ -1,0 +1,70 @@
+import { StyleSheet } from "react-native";
+
+const styles = StyleSheet.create({
+  titletext: {
+    fontSize: 40,
+    color: "#073021",
+    fontWeight: "bold",
+    marginTop: "5%",
+  },
+  container: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "flex-start",
+    width: "100%",
+    resizeMode: "cover",
+  },
+  retangulo: {
+    position: "absolute",
+    bottom: 1,
+    width: "100%",
+    height: "90%",
+    backgroundColor: "#fffff",
+    alignItems: "center",
+    borderTopLeftRadius: 40,
+    borderTopRightRadius: 40,
+  },
+  shadowBox: {
+    width: 350,
+    height: 50,
+    marginTop: 10,
+    borderRadius: 20,
+    backgroundColor: "white",
+    elevation: 15,
+  },
+  homeBar: {
+    //backgroundColor: "white",
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    width: "100%",
+    height: "10%",
+  },
+  botao: {
+    width: 300,
+    height: 110,
+    borderRadius: 25,
+    backgroundColor: "#9BFF99",
+    elevation: 5,
+    marginTop: 70
+  },
+  corview: {
+    position: "absolute",
+    width: 215,
+    height: 110,
+    backgroundColor: "white",
+    borderRadius: 25,
+    alignSelf: "flex-end",
+    opacity: 0.7,
+    alignContent: "center",
+    justifyContent: "center",
+  },
+  textobotao: {
+    fontSize: 20,
+    color: "#073021",
+    fontWeight: "bold",
+    textAlign: "center",
+  },
+});
+
+export default styles;
