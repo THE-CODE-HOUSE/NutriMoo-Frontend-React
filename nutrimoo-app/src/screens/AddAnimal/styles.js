@@ -45,6 +45,12 @@ const styles = StyleSheet.create({
       backgroundColor: "white",
       elevation: 15,
     },
+    homeBar: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      width:'100%',
+      height: '11%',
+    },
     contText: {
       marginTop: 10,
       fontSize: 18,
@@ -80,6 +86,25 @@ const styles = StyleSheet.create({
       paddingLeft: 45, // Aumente o padding para não sobrepor o ícone
       fontSize: 16,
     },
+
+    centeredView:{
+      flex:1,
+      justifyContent:'center',
+      alignItems: 'center',
+      marginTop:22
+    },
+    modalView:{
+      margin:20,
+      backgroundColor:'white',
+      borderRadius:20,
+      width:'90%',
+      padding:35,
+      alignItems:'center',
+      elevation:10
+    }
+
+
+
   });
 
   export default styles;

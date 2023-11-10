@@ -7,7 +7,9 @@ import {
     FlatList
 } from 'react-native';
 
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 import React, { useState } from 'react';
+import { MaterialIcons } from '@expo/vector-icons';
 
 
 export const CustomDropDown = ({ title, subTitle, options, zIndex, onSelect, titleColor }) => {
@@ -17,9 +19,19 @@ export const CustomDropDown = ({ title, subTitle, options, zIndex, onSelect, tit
     return (
         <View style={styles.container}>
         <Text style={[styles.heading, { color: titleColor || '#000' }]}>{title}</Text>
-
+            
             <TouchableOpacity style={[styles.dropDownSelector, styles.boxShadow]} onPress={() => { setIsClicked(!isClicked) }}>
                 <Text>{selectedItem}</Text>
+                <MaterialCommunityIcons name='cow' size={24} style= {{marginRight: '75%'}}/>
+
+                {isClicked ? (
+                    <MaterialIcons name='arrow-drop-down' size={24}  />
+                ) : (
+                    <MaterialIcons name='arrow-drop-down' size={24} />
+                )
+
+                }
+
 
             </TouchableOpacity>
             {isClicked && (
@@ -76,7 +88,6 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
-        paddingLeft: 15,
         paddingRight: 15,
         marginBottom: '2%',
         elevation:10
