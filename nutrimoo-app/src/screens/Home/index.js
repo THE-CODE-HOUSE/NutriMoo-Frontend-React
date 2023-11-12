@@ -10,7 +10,7 @@ import {
   Keyboard,
   TouchableOpacity,
   ImageBackground,
-  Button
+  Button,
 } from "react-native";
 
 import styles from "./styles";
@@ -31,62 +31,66 @@ const HomeScreen = () => {
           <View style={styles.homeBar}>
             <TouchableOpacity>
               <View style={{ backgroundColor: "transparent", margin: 20 }}>
-                <MaterialIcons name="menu" size={32} color="gray" />
+                <MaterialIcons name="menu" size={32} color="#073021" />
               </View>
             </TouchableOpacity>
 
-            <Text style={{ fontSize: 24, fontWeight: "bold" }}>HOME</Text>
+            <Text
+              style={{ fontSize: 24, fontWeight: "bold", color: "#073021" }}
+            >
+              HOME
+            </Text>
 
             <TouchableOpacity>
               <View style={{ backgroundColor: "transparent", margin: 20 }}>
-                <MaterialIcons name="person" size={32} color="gray" />
+                <MaterialIcons name="person" size={32} color="#073021" />
               </View>
             </TouchableOpacity>
           </View>
 
           <View style={styles.retangulo}>
-          <View style={[ styles.retangulo,{ opacity: .9, backgroundColor: "#FBF6E9", height: "100%" }]}></View>
+            <View
+              style={[
+                styles.retangulo,
+                { opacity: 0.9, backgroundColor: "#FBF6E9", height: "100%" },
+              ]}
+            ></View>
 
-          <TouchableOpacity style = {styles.botao}>
+            <TouchableOpacity style={styles.button}>
+              <View style={styles.iconContainer}>
+                <Image
+                  source={require("../../../assets/images/cow.png")} // Substitua com o caminho correto da imagem
+                  style={styles.icon}
+                />
+              </View>
+              <View style={styles.textContainer}>
+                <Text style={styles.text}>LISTA DE ANIMAIS</Text>
+              </View>
+            </TouchableOpacity>
 
-            <Image source={require("../../../assets/images/cow.png")} style={{width: "30%"}} />
-            
-            <View style= {styles.corview}>
-                <Text style = {styles.textobotao}>
-                    LISTA DE ANIMAL
-                </Text>
-            </View>
+            <TouchableOpacity style={styles.button}>
+              <View style={styles.iconContainer}>
+                <Image
+                  source={require("../../../assets/images/diet.png")} // Substitua com o caminho correto da imagem
+                  style={styles.icon}
+                />
+              </View>
+              <View style={styles.textContainer}>
+                <Text style={styles.text}>LISTA DE DIETAS</Text>
+              </View>
+            </TouchableOpacity>
 
-          </TouchableOpacity>
+            <TouchableOpacity style={styles.button}>
+              <View style={styles.iconContainer}>
+              <MaterialIcons name="add" size={92} color="#073021" />
+              </View>
+              <View style={styles.textContainer}>
+                <Text style={styles.text}>CADASTRAR USUÁRIO</Text>
+              </View>
+            </TouchableOpacity>
 
-          <TouchableOpacity style = {styles.botao}>
-
-            <MaterialIcons name="add" size={92} color="#073021" />
-            
-            <View style= {styles.corview}>
-                <Text style = {styles.textobotao}>
-                    CADASTRO USUÁRIOS
-                </Text>
-            </View>
-
-          </TouchableOpacity>
-
-          <TouchableOpacity style = {styles.botao}>
-
-            <Image source={require("../../../assets/images/diet.png")} style={{width: "30%"}} />
-            
-            <View style= {styles.corview}>
-                <Text style = {styles.textobotao}>
-                    LISTA DE DIETAS
-                </Text>
-            </View>
-
-          </TouchableOpacity>
-          
-        </View>
-
-      </ImageBackground>
-
+          </View>
+        </ImageBackground>
       </SafeAreaView>
     </TouchableWithoutFeedback>
   );

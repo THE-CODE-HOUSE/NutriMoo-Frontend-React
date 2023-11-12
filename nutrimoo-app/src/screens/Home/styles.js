@@ -40,26 +40,40 @@ const styles = StyleSheet.create({
     width: "100%",
     height: "10%",
   },
-  botao: {
+  button: {
     width: 300,
     height: 110,
-    borderRadius: 25,
+    flexDirection: 'row',
+    alignItems: 'center',
     backgroundColor: "#9BFF99",
+    borderRadius: 30,
     elevation: 5,
     marginTop: 70
   },
-  corview: {
-    position: "absolute",
-    width: 215,
-    height: 110,
-    backgroundColor: "white",
-    borderRadius: 25,
-    alignSelf: "flex-end",
-    opacity: 0.7,
+  iconContainer: {
+    width:"33%",
+    height:"100%",
+    backgroundColor: "#9BFF99", // Cor de fundo do ícone
+    borderRadius: 30, // Ajuste para corresponder ao design
+    padding: 5,
+    marginRight: 10,
+    alignContent: "center"
+  },
+  icon: {
+    color: "#073021",
+    width: "100%", // Ajuste conforme necessário
+    height: "100%", // Ajuste conforme necessário
+  },
+  textContainer: {
+    backgroundColor:'white',
+    borderRadius: 30,
+    height:"100%",
+    width:"64%",
     alignContent: "center",
+    opacity: 0.7,
     justifyContent: "center",
   },
-  textobotao: {
+  text: {
     fontSize: 20,
     color: "#073021",
     fontWeight: "bold",
