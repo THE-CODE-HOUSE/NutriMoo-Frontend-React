@@ -1,13 +1,14 @@
 import React from 'react';
 import { View } from 'react-native';
 import SignInScreen from './src/screens/SignIn';
-import AddAnimalScreen from './src/screens/AddAnimal';
+import SignUpScreen from './src/screens/SignUp';
 
 
 export default function App() {
   return (
     <View style={{ flex: 1}}>
-      <AddAnimalScreen/>
+      <SignUpScreen />
     </View>
   );
 }
+
