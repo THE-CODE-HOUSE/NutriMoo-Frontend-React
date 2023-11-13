@@ -101,8 +101,16 @@ const styles = StyleSheet.create({
       padding:35,
       alignItems:'center',
       elevation:10
+    },
+    selectList:{
+      width: 350,
+      height: 50,
+      marginTop: 10,
+      borderRadius: 20,
+      backgroundColor: "white",
+      elevation: 15,
+      borderWidth:0
     }
-
 
 
   });
