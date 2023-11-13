@@ -44,6 +44,7 @@ const SignInScreen = () => {
   }
 
   async function handleSignIn() {
+ 
     if (email === "" || !regexEmail.test(email)) {
       setErrorMessage(email === "" ? "Por favor, insira seu e-mail." : "E-mail inválido. Verifique se está no formato correto.");
       return;
@@ -60,7 +61,7 @@ const SignInScreen = () => {
       const response = await submitLogin(email, password);
       console.log(response.data.token);
       UserStorage.setUser(response.data);
-      console.log(UserStorage.getUser());
+      console.log(await UserStorage.getUser());
       // Lidar com a resposta - atualizar o estado, redirecionar o usuário, etc.
     } catch (error) {
       setErrorMessage("Erro ao fazer login. Por favor, tente novamente.");
