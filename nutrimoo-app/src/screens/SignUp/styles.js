@@ -46,7 +46,7 @@ const styles = StyleSheet.create({
       elevation: 15,
     },
     contText: {
-      marginTop: 10,
+      marginTop: 8,
       fontSize: 18,
       color: "#073021",
       fontWeight: "bold",
@@ -61,6 +61,7 @@ const styles = StyleSheet.create({
       justifyContent: "center",
       alignItems: "center",
       marginTop: 30,
+      zIndex:4000
     },
   
     buttonText: {
@@ -80,6 +81,15 @@ const styles = StyleSheet.create({
       paddingLeft: 45, // Aumente o padding para não sobrepor o ícone
       fontSize: 16,
     },
+    selectList:{
+      width: 350,
+      height: 50,
+      marginTop: 10,
+      borderRadius: 20,
+      backgroundColor: "white",
+      elevation: 15,
+      borderWidth:0
+    }
   });
 
   export default styles;

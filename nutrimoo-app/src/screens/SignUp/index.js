@@ -14,20 +14,43 @@ import {
 
 import styles from "./styles";
 import { CustomDropDown } from "../../components/CustomDropDown";
+import { SelectList } from "react-native-dropdown-select-list";
 import { MaterialIcons } from "@expo/vector-icons";
 import { useState } from "react";
-
+import { ScrollView } from "react-native-gesture-handler";
 
 const SignUpScreen = () => {
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [hidePassword, setHidePassword] = useState(true);
   const [errorMessage, setErrorMessage] = useState("");
   const regexEmail = /^[A-Za-z0-9._%-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$/;
+  const [departament, setDepartament] = React.useState("PR");
+  const [role, setRole] = React.useState("");
+
+  const departaments = [
+    { key: "PR", value: "Produção" },
+    { key: "VT", value: "Veterinária" },
+    { key: "NU", value: "Nutrição" },
+  ];
+
+  const roles = {
+    PR: [
+      { key: "PD", value: "Produtor" },
+      { key: "GE", value: "Gerente" },
+      { key: "TR", value: "Trabalhador" },
+    ],
+    VT: [{ key: "VE", value: "Veterinário" }],
+    NU: [{ key: "NT", value: "Nutricionista" }],
+  };
 
   const handleSignUp = () => {
+
+    if (name == "")setErrorMessage("Por favor, insira seu nome.");
+
     if (email == "" || !regexEmail.test(email)) {
-      if (password == "") setErrorMessage("Por favor, insira seu e-mail.");
+      if (email == "") setErrorMessage("Por favor, insira seu e-mail.");
       setErrorMessage("E-mail inválido. Verifique se está no formato correto.");
       return;
     }
@@ -47,20 +70,22 @@ const SignUpScreen = () => {
     <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
       <SafeAreaView style={styles.container}>
         <StatusBar hidden={true} />
-
         <ImageBackground
           source={require("../../../assets/images/background.png")}
           style={styles.image}
         >
           <View style={styles.homeBar}>
-          <TouchableOpacity
-          // Adicione o método navigation aqui
-          style={{ backgroundColor: "transparent" , marginTop: 30, marginLeft:20}}
-        >
-          <MaterialIcons name="arrow-back" size={32} color="#073021" />
-        </TouchableOpacity>
-        </View>
-
+            <TouchableOpacity
+              // Adicione o método navigation aqui
+              style={{
+                backgroundColor: "transparent",
+                marginTop: 30,
+                marginLeft: 20,
+              }}
+            >
+              <MaterialIcons name="arrow-back" size={32} color="#073021" />
+            </TouchableOpacity>
+          </View>
 
           <View style={styles.retangulo}>
             <View
@@ -92,8 +117,8 @@ const SignUpScreen = () => {
               <TextInput
                 placeholder="Nome"
                 autoCorrect={false}
-                keyboardType="nome"
-                onChangeText={(text) => setEmail(text)}
+                defaultValue={name}
+                onChangeText={(text) => setName(text)}
                 style={styles.textinputWithIcon}
                 maxLength={40}
               />
@@ -120,7 +145,6 @@ const SignUpScreen = () => {
             </View>
 
             <Text style={styles.contText}>SENHA</Text>
-
             <View style={styles.shadowBox}>
               {
                 <MaterialIcons
@@ -139,8 +163,6 @@ const SignUpScreen = () => {
                 style={styles.textinputWithIcon}
                 maxLength={15}
               />
-
-
               <TouchableOpacity
                 style={[styles.iconStyle, { right: 15, left: undefined }]}
                 onPress={() => setHidePassword(!hidePassword)}
@@ -151,15 +173,31 @@ const SignUpScreen = () => {
                   color="gray"
                 />
               </TouchableOpacity>
-
             </View>
 
+            <Text style={styles.contText}>DEPARTAMENTO</Text>
+            <SelectList
+              setSelected={setDepartament}
+              boxStyles={styles.selectList}
+              dropdownStyles={{backgroundColor:"white"}}
+              data={departaments}
+              search={false}
+              placeholder={"Selecione um departamento"}
+              defaultOption={{ key: "PR", value: "Produção" }}
+            />
 
-            <CustomDropDown title={'DEPARTAMENTO'} zIndex={2000} titleColor={'#073021'} />
+            <Text style={styles.contText}>FUNÇÃO</Text>
+            <SelectList
+              setSelected={setRole}
+              boxStyles={styles.selectList}
+              dropdownStyles={{backgroundColor:"white"}}
+              search={false}
+              data={roles[departament]}
+              placeholder={"Selecione uma função"}
+              defaultOption={roles[departament][0]}
+            />
 
-            <CustomDropDown title={'FUNÇÃO'} zIndex={2000} titleColor={'#073021'} />
-
-              {errorMessage ? (
+            {errorMessage ? (
               <Text style={{ color: "red", marginTop: 10, fontWeight: "400" }}>
                 {errorMessage}
               </Text>
@@ -168,7 +206,6 @@ const SignUpScreen = () => {
             <TouchableOpacity style={styles.button} onPress={handleSignUp}>
               <Text style={styles.buttonText}>CADASTRAR</Text>
             </TouchableOpacity>
-
           </View>
         </ImageBackground>
       </SafeAreaView>
