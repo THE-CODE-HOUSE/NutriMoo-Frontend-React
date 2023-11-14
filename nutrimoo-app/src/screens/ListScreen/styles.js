@@ -66,6 +66,67 @@ const styles = StyleSheet.create({
     justifyContent: 'center'
   },
 
+  /* TESTE*/ 
+  card: {
+        marginHorizontal: 20,
+        marginVertical: 5,
+        padding: 0,
+        paddingLeft: 0,
+        flexDirection: "row",
+        backgroundColor: "lightgreen",
+        borderRadius: 10
+    },
+    num: {
+        fontSize: 19,
+        paddingLeft: 5,
+        alignSelf: 'center',
+        justifyContent: 'space-between',
+        flexShrink: 0,
+        flexDirection: 'column'
+
+    },
+
+    image: {
+        justifyContent: 'center',
+        width: '15%',
+        height: '100%',
+        resizeMode: 'stretch',
+
+    },
+
+    customButton: {
+        height: '15%',
+        width: '40%',
+        backgroundColor: '#fff',
+        borderRadius: 25,
+        marginVertical: '1%',
+        marginHorizontal: '2.5%',
+        justifyContent: 'space-between',
+        elevation: 10,
+        
+    },
+    rectangle: {
+        marginTop: '7.5%',
+        width: '100%',
+        height: '90%',
+        borderRadius: 25,
+        alignItems: 'center',
+        justifyContent: 'center' 
+    },
+
+    buttonText: {
+        fontSize: 18,
+        color: '#000',
+        flexDirection: 'column',
+        textTransform: 'capitalize',
+        justifyContent: 'center',
+        margin: '2%'
+    },
+
+
+
+
+
   
 });
 

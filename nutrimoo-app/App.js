@@ -1,13 +1,12 @@
 import React from 'react';
 import { View } from 'react-native';
-import SignInScreen from './src/screens/SignIn';
-import ConfigScreen from './src/screens/ConfigScreen';
+import ListScreen from './src/screens/ListScreen';
 
 
 export default function App() {
   return (
     <View style={{ flex: 1}}>
-      <ConfigScreen />
+      <ListScreen />
     </View>
   );
 }
