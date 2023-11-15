@@ -13,11 +13,10 @@ import {
 } from "react-native";
 
 import styles from "./styles";
-import { CustomDropDown } from "../../components/CustomDropDown";
 import { SelectList } from "react-native-dropdown-select-list";
 import { MaterialIcons } from "@expo/vector-icons";
 import { useState } from "react";
-import { ScrollView } from "react-native-gesture-handler";
+import { submitRegister } from "../../services/authService";
 
 const SignUpScreen = () => {
   const [name, setName] = useState("");
@@ -35,6 +34,11 @@ const SignUpScreen = () => {
     { key: "NU", value: "Nutrição" },
   ];
 
+  function getDepartmentValueByKey(keyToFind) {
+    const departmentEntry = departaments.find(({ key }) => key === keyToFind);
+    return departmentEntry ? departmentEntry.value : null;
+  }
+
   const roles = {
     PR: [
       { key: "PD", value: "Produtor" },
@@ -45,25 +49,53 @@ const SignUpScreen = () => {
     NU: [{ key: "NT", value: "Nutricionista" }],
   };
 
-  const handleSignUp = () => {
+  function getRoleValueByKey(keyToFind) {
+    for (let category in roles) {
+      const roleEntry = roles[category].find(({ key }) => key === keyToFind);
+      if (roleEntry) {
+        return roleEntry.value;
+      }
+    }
+    return null; // Retorna null se a chave não for encontrada
+  }
 
-    if (name == "")setErrorMessage("Por favor, insira seu nome.");
-
-    if (email == "" || !regexEmail.test(email)) {
-      if (email == "") setErrorMessage("Por favor, insira seu e-mail.");
-      setErrorMessage("E-mail inválido. Verifique se está no formato correto.");
+  const handleSignUp = async () => {
+    if (name === "") {
+      setErrorMessage("Por favor, insira seu nome.");
       return;
     }
 
-    if (password == "" || password.length < 6) {
-      if (password == "") setErrorMessage("Por favor, insira sua senha.");
-      setErrorMessage("A senha deve conter pelo menos 6 digitos.");
+    if (email === "" || !regexEmail.test(email)) {
+      setErrorMessage(
+        email === ""
+          ? "Por favor, insira seu e-mail."
+          : "E-mail inválido. Verifique se está no formato correto."
+      );
+      return;
+    }
+
+    if (password === "" || password.length < 6) {
+      setErrorMessage(
+        password === ""
+          ? "Por favor, insira sua senha."
+          : "A senha deve conter pelo menos 6 dígitos."
+      );
       return;
     }
 
     // Se chegou até aqui, ambos os campos estão preenchidos.
     setErrorMessage(""); // Limpar mensagem de erro.
-    console.log("Botão Entrar pressionado");
+    try {
+      console.log(getRoleValueByKey(role), getDepartmentValueByKey(departament));
+      const roleValue = getRoleValueByKey(role);
+      const departamentValue = getDepartmentValueByKey(departament);
+
+      await submitRegister(email, password, roleValue, name, departamentValue);
+    } catch (error) {
+      setErrorMessage("Erro ao fazer login. Por favor, tente novamente.");
+      console.log(error);
+    } finally {
+    }
   };
 
   return (
@@ -179,7 +211,7 @@ const SignUpScreen = () => {
             <SelectList
               setSelected={setDepartament}
               boxStyles={styles.selectList}
-              dropdownStyles={{backgroundColor:"white"}}
+              dropdownStyles={{ backgroundColor: "white" }}
               data={departaments}
               search={false}
               placeholder={"Selecione um departamento"}
@@ -190,7 +222,7 @@ const SignUpScreen = () => {
             <SelectList
               setSelected={setRole}
               boxStyles={styles.selectList}
-              dropdownStyles={{backgroundColor:"white"}}
+              dropdownStyles={{ backgroundColor: "white" }}
               search={false}
               data={roles[departament]}
               placeholder={"Selecione uma função"}

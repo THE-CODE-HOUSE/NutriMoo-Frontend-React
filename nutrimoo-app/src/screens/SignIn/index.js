@@ -15,8 +15,8 @@ import styles from "./styles";
 
 import { MaterialIcons } from "@expo/vector-icons";
 import { useState } from "react";
-import api from "../../services/api"
-import {UserStorage} from "../../storage/storage"
+import {UserStorage} from "../../storage/storage";
+import {submitLogin} from "../../services/authService";
 
 const SignInScreen = () => {
   const [email, setEmail] = useState("");
@@ -24,24 +24,6 @@ const SignInScreen = () => {
   const [hidePassword, setHidePassword] = useState(true);
   const [errorMessage, setErrorMessage] = useState("");
   const regexEmail = /^[A-Za-z0-9._%-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$/;
-
-  async function submitLogin(email, password) {
-    try {
-      const response = await api.post(
-        "/auth/login",
-        { email, password },
-        {
-          headers: { requiresAuth: false },
-        }
-      );
-      console.log(response.data);
-      return response
-      // Trate a resposta aqui
-    } catch (error) {
-      console.error("Erro no login", error);
-      // Trate o erro aqui
-    }
-  }
 
   async function handleSignIn() {
  
@@ -55,17 +37,14 @@ const SignInScreen = () => {
       return;
     }
   
-    setErrorMessage(""); // Limpar mensagem de erro.
+    setErrorMessage("");
   
     try {
-      const response = await submitLogin(email, password);
-      console.log(response.data.token);
-      UserStorage.setUser(response.data);
+      await submitLogin(email, password);
       console.log(await UserStorage.getUser());
-      // Lidar com a resposta - atualizar o estado, redirecionar o usuário, etc.
     } catch (error) {
       setErrorMessage("Erro ao fazer login. Por favor, tente novamente.");
-      // Tratar o erro - talvez logar para depuração ou mostrar uma mensagem específica
+      console.log(error);
     } finally {
     }
   }
