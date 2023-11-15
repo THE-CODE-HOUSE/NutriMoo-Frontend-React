@@ -18,7 +18,7 @@ import styles from "./styles";
 import { MaterialIcons } from "@expo/vector-icons";
 import { useState } from "react";
 
-const SelectAnimalType = () => {
+const SelectCowNutritionGoal = () => {
   return (
     <TouchableWithoutFeedback accessible={false}>
       <SafeAreaView style={styles.container}>
@@ -38,8 +38,7 @@ const SelectAnimalType = () => {
             <Text
               style={{ fontSize: 24, fontWeight: "bold", color: "#073021", marginTop: 22}}
             >
-              TIPO DE {'\n'}
-              ANIMAL
+              META
             </Text>
 
             <TouchableOpacity>
@@ -57,47 +56,26 @@ const SelectAnimalType = () => {
               ]}
             ></View>
 
-            <View style={styles.teste}>
+            <View style={styles.buttonContainer}>
               <TouchableOpacity style={styles.button}>
                 <View style={styles.textContainer}>
-                  <Text style={styles.text}>VACA EM LACTAÇÃO</Text>
+                  <Text style={styles.text}>GANHAR PESO</Text>
                 </View>
               </TouchableOpacity>
 
               <TouchableOpacity style={styles.button}>
                 <View style={styles.textContainer}>
-                  <Text style={styles.text}>BEZERRA/ NOVILHA</Text>
+                  <Text style={styles.text}>MANTER PESO</Text>
+                </View>
+              </TouchableOpacity>
+
+              <TouchableOpacity style={styles.button}>
+                <View style={styles.textContainer}>
+                  <Text style={styles.text}>PERDER PESO</Text>
                 </View>
               </TouchableOpacity>
             </View>
 
-            <View style={styles.teste}>
-              <TouchableOpacity style={styles.button}>
-                <View style={styles.textContainer}>
-                  <Text style={styles.text}>VACA</Text>
-                </View>
-              </TouchableOpacity>
-
-              <TouchableOpacity style={styles.button}>
-                <View style={styles.textContainer}>
-                  <Text style={styles.text}>BOI</Text>
-                </View>
-              </TouchableOpacity>
-            </View>
-
-            <View style={styles.teste}>
-              <TouchableOpacity style={styles.button}>
-                <View style={styles.textContainer}>
-                  <Text style={styles.text}>TOURO</Text>
-                </View>
-              </TouchableOpacity>
-
-              <TouchableOpacity style={styles.button}>
-                <View style={styles.textContainer}>
-                  <Text style={styles.text}>TODOS</Text>
-                </View>
-              </TouchableOpacity>
-            </View>
 
           </View>
         </ImageBackground>
@@ -106,4 +84,4 @@ const SelectAnimalType = () => {
   );
 };
 
-export default SelectAnimalType;
+export default SelectCowNutritionGoal;

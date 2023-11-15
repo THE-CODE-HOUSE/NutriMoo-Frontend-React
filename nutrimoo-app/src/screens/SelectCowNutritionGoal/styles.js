@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
     position: "absolute",
     bottom: 1,
     width: "100%",
-    height: "84%",
+    height: "75%",
     backgroundColor: "#fffff",
     alignItems: "center",
     borderTopLeftRadius: 40,
@@ -41,14 +41,14 @@ const styles = StyleSheet.create({
     height: "10%",
   },
   button: {
-    width: 160,
-    height: 130,
+    width: 260,
+    height: 120,
     flexDirection: 'row',
     alignItems: 'center',
     backgroundColor: "#9BFF99",
     borderRadius: 30,
     elevation: 5,
-    marginTop: 60,
+    marginTop: 40,
     margin:10
   },
   icon: {
@@ -70,8 +70,8 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     textAlign: "center",
   },
-  teste:{
-    flexDirection:"row",
+  buttonContainer:{
+    flexDirection:"column",
   }
 });
 
