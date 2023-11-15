@@ -8,7 +8,7 @@ import AddAnimalScreen from './src/screens/AddAnimal'
 export default function App() {
   return (
     <View style={{ flex: 1}}>
-      <SignUpScreen />
+      <AddAnimalScreen />
     </View>
   );
 }

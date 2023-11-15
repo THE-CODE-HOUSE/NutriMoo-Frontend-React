@@ -25,19 +25,24 @@ const AddAnimalScreen = () => {
   const [date, setDate] = useState(new Date());
   const [show, setShow] = useState(false);
   const [mode, setMode] = useState("date");
-  const [departament, setDepartament] = React.useState("PR");
-  const [departament1, setDepartament1] = React.useState("PR");
+  const [animalType, setAnimalType] = React.useState("VL");
+  const [animalBreed, setAnimalBreed] = React.useState("VL");
 
-  const departaments = [
-    { key: "PR", value: "Produção" },
-    { key: "VT", value: "Veterinária" },
-    { key: "NU", value: "Nutrição" },
+  const animalTypes = [
+    { key: "VL", value: "Vaca em lactação" },
+    { key: "BN", value: "Bezerra/Novilha" },
+    { key: "VA", value: "Vaca" },
+    { key: "BO", value: "Boi" },
+    { key: "TO", value: "Touro" },
   ];
 
-  const departaments1 = [
-    { key: "PR", value: "Produção" },
-    { key: "VT", value: "Veterinária" },
-    { key: "NU", value: "Nutrição" },
+  const animalBreeds = [
+    { key: "HO", value: "Holandesa" },
+    { key: "JE", value: "Jersey" },
+    { key: "GU", value: "Guernsey" },
+    { key: "AB", value: "Aberdeen Angus" },
+    { key: "HE", value: "Hereford" },
+    { key: "CH", value: "Charolês" }
   ];
 
   const onChange = (event, selectedDate) => {
@@ -117,24 +122,24 @@ const AddAnimalScreen = () => {
 
             <Text style={styles.contText}>ESTÁGIO</Text>
             <SelectList
-              setSelected={setDepartament}
+              setSelected={setAnimalType}
               boxStyles={styles.selectList}
               dropdownStyles={{ backgroundColor: "white" }}
-              data={departaments}
+              data={animalTypes}
               search={false}
               placeholder={"Selecione um departamento"}
-              defaultOption={{ key: "PR", value: "Produção" }}
+              defaultOption={{ key: "VL", value: "Vaca em lactação" }}
             />
 
             <Text style={styles.contText}>RAÇA</Text>
             <SelectList
-              setSelected={setDepartament1}
+              setSelected={setAnimalBreed}
               boxStyles={styles.selectList}
               dropdownStyles={{ backgroundColor: "white" }}
-              data={departaments1}
+              data={animalBreeds}
               search={false}
               placeholder={"Selecione um departamento"}
-              defaultOption={{ key: "PR", value: "Produção" }}
+              defaultOption={{ key: "JE", value: "Jersey" }}
             />
 
             <Text style={styles.contText}>PESO</Text>
@@ -150,7 +155,7 @@ const AddAnimalScreen = () => {
               <TextInput
                 placeholder="Peso em Kg"
                 autoCorrect={false}
-                keyboardType="default"
+                keyboardType="numeric"
                 style={styles.textinputWithIcon}
                 maxLength={40}
               />
