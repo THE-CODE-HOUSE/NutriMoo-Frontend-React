@@ -18,7 +18,7 @@ import styles from "./styles";
 import { MaterialIcons } from "@expo/vector-icons";
 import { useState } from "react";
 
-const SelectAnimalType = () => {
+const CowNutritionType = () => {
   return (
     <TouchableWithoutFeedback accessible={false}>
       <SafeAreaView style={styles.container}>
@@ -87,4 +87,4 @@ const SelectAnimalType = () => {
   );
 };
 
-export default SelectAnimalType;
+export default CowNutritionType;
