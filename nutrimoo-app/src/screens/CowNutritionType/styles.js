@@ -71,7 +71,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
   teste:{
-    flexDirection:"row",
+    flexDirection:"column",
   }
 });
 
