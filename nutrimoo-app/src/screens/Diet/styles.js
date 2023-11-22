@@ -68,60 +68,54 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     textAlign: "center",
   },
-  teste:{
-    flexDirection:"row",
-  },
+
   ContainerHeader:{
     flexDirection: 'row',
-    height:62,
-    width: 350,
+    height: 70,
+    width: '100%',
     justifyContent: 'space-around',
+    alignItems:'center',
     backgroundColor: '#073021',
-    padding: 10,
-    borderTopLeftRadius: 10, // Arredondar os cantos superiores
-    borderTopRightRadius: 10
-  },
+    borderTopRightRadius: 30,
+    borderTopLeftRadius: 30,
+   },
   ContainerLinhaBranca:{
-    height: 310,
-    width: 350,
-    flexDirection: 'column',
+    height: 309,
+    width: 380,
+    justifyContent:'center',
+    alignSelf:'center',
     backgroundColor: 'white',
-    borderTopLeftRadius: 10, // Arredondar os cantos superiores
-    borderTopRightRadius: 10
+    borderRadius: 30,
+    elevation: 10
   },
   ContainerLinhaVerde:{
-    height: 62,
-    width: 280,
+    height: 70,
+    width: 380,
     flexDirection: 'column',
     justifyContent: 'center',
     backgroundColor: '#C6FBD1',
-    borderTopLeftRadius: 10, // Arredondar os cantos superiores
-    borderTopRightRadius: 10,
-    marginTop: 50
   },
-  ContainerColuna:{
-    height: 310,
+  /*ContainerColuna:{
+    height: 280,
     width: 70,
-    flexDirection: 'row',
+    flexDirection: 'column',
     backgroundColor: '#9CFD9D',
-    padding: 10,
-    borderBottomRightRadius: 15, // Arredondar os cantos superiores
-    borderBottomLeftRadius: 15
-  },
+    borderBottomLeftRadius: 30
+  },*/
   headerText:{
-    fontSize: 12,
+    fontSize: 11,
     alignSelf:'center',
     color:'white',
     fontWeight: 'bold',
-
   },
   TextoText:{
     fontWeight: 'bold',
-    fontSize: 12,
+    fontSize: 11,
     color:'#073021',
-    marginTop: 10
-    
+    marginTop:70,
+    marginRight: -10,
+    position:'absolute',
   }
 });
 
-export default styles;
+export default styles;

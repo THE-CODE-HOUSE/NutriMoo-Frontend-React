@@ -77,37 +77,46 @@ const DietScreen = () => {
             >
               TIPO DA DIETA
             </Text>
-            <View>
+            <View style={{marginTop: 50}}>
 
                 {/* CABEÇALHO */}
 
-                <View>
-                    <View style={styles.ContainerHeader}>
-                        <Text style={styles.headerText}>ALIMENTO</Text>
-                        <Text style={styles.headerText}>CARBOIDRATOS</Text>
-                        <Text style={styles.headerText}>PROTEINAS</Text>
-                        <Text style={styles.headerText}>GORDURA</Text>
-                        <Text style={styles.headerText}>QTD</Text>
-                    </View>
+                <View style={styles.ContainerLinhaBranca}>
+                          <View style={styles.ContainerHeader}>
+                                    <View style={{flexDirection:'column',alignItems:'center'}}>
+                                            <Text style={styles.headerText}>ALIMENTO</Text>
+                                            <Text style={styles.TextoText}>RAÇÃO</Text>
+                                    </View>
 
-                    <View style={styles.ContainerLinhaBranca}>
-                            <View style={styles.ContainerColuna}>
-                            
-                            <View style={{flexDirection:'row'}}>
-                                    <Text style={styles.TextoText}> RAÇÃO</Text>
-                                    <Text style={[styles.TextoText, style={marginLeft: 55}]}>100g</Text>
-                                    <Text style={[styles.TextoText, style={marginLeft: 55}]}>20g</Text>
-                                    <Text style={[styles.TextoText, style={marginLeft: 47}]}>400g</Text>
-                                    <Text style={[styles.TextoText, style={marginLeft: 20}]}>1000g</Text>
-                            </View>
-                            
+                                    <View style={{flexDirection:'column',alignItems:'center'}}>
+                                            <Text style={styles.headerText}>CARB.</Text>
+                                            <Text style={styles.TextoText}>100g</Text>
+                                    </View>
 
-                                <View style={[styles.ContainerLinhaVerde, style={marginLeft: -191}]}>
-                                    <View style={[styles.ContainerLinhaVerde, style={marginTop:252}]}>
-                                    </View> 
-                                </View>
+                                    <View style={{flexDirection:'column',alignItems:'center'}}>
+                                            <Text style={styles.headerText}>PROTEÍNAS</Text>
+                                            <Text style={styles.TextoText}>20g</Text>
+                                    </View>
+
+                                    <View style={{flexDirection:'column',alignItems:'center'}}>
+                                            <Text style={styles.headerText}>GORDURA</Text>
+                                            <Text style={styles.TextoText}>400g</Text>
+                                    </View>
+                                    
+                                    <View style={{flexDirection:'column',alignItems:'center'}}>
+                                            <Text style={styles.headerText}>QTD.</Text>
+                                            <Text style={styles.TextoText}>1000g</Text>
+                                    </View>
+                        
                             </View>
-                    </View>
+
+                              <View style={[styles.ContainerLinhaVerde, style= {marginTop: 70}]}>
+                                    </View>
+
+                                    <View style={[styles.ContainerLinhaVerde, style={marginTop: 70, borderBottomRightRadius: 30, borderBottomLeftRadius: 30}]}> 
+                                    </View>
+
+                                                         
                 </View>
 
                 {/* LISTA, PODE FAZER COM CONTAINER, DEPOIS ALTERO */}
@@ -120,4 +129,4 @@ const DietScreen = () => {
   );
 };
 
-export default DietScreen;
+export default DietScreen;
