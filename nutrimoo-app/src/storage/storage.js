@@ -19,4 +19,19 @@ const UserStorage = {
     }
 };
 
-export {UserStorage};
+const AnimalStorage = {
+    setAnimals: (animals) => {
+        AsyncStorage.setItem('animals', JSON.stringify(animals));
+    },
+    getAnimals: async () => {
+        try {
+            const animals = await AsyncStorage.getItem('animals');
+            return animals ? JSON.parse(animals) : [];
+        } catch (e) {
+            // Tratar erro
+            return [];
+        }
+    }
+};
+
+export {UserStorage, AnimalStorage};
