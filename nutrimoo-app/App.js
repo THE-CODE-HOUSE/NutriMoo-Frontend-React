@@ -6,13 +6,13 @@ import SignUpScreen from './src/screens/SignUp';
 import AddAnimalScreen from './src/screens/AddAnimal'
 import SelectCowNutritionGoal from './src/screens/SelectCowNutritionGoal';
 import SelectAnimalType from './src/screens/SelectAnimalType';
+import AdvancedInfo from './src/screens/AdvancedInfo';
 
 
 export default function App() {
   return (
     <View style={{ flex: 1}}>
-
-      <ListScreen />
+      <AdvancedInfo />
     </View>
   );
 }
