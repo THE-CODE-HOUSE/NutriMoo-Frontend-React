@@ -138,7 +138,7 @@ const EditAnimalScreen = () => {
 
 
             <TouchableOpacity style={styles.button} >
-              <Text style={styles.buttonText}>ADICIONAR</Text>
+              <Text style={styles.buttonText}>EDITAR</Text>
             </TouchableOpacity>
 
           </View>

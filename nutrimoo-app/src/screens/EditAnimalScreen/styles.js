@@ -103,8 +103,6 @@ const styles = StyleSheet.create({
       elevation:10
     }
 
-
-
   });
 
   export default styles;
