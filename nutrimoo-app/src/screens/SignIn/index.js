@@ -40,6 +40,7 @@ const SignInScreen = () => {
     setErrorMessage("");
   
     try {
+      console.log(await UserStorage.getUser());
       await submitLogin(email, password);
       console.log(await UserStorage.getUser());
     } catch (error) {
