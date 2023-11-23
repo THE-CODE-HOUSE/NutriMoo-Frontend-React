@@ -7,12 +7,13 @@ import AddAnimalScreen from './src/screens/AddAnimal'
 import SelectCowNutritionGoal from './src/screens/SelectCowNutritionGoal';
 import SelectAnimalType from './src/screens/SelectAnimalType';
 import AdvancedInfo from './src/screens/AdvancedInfo';
+import EditAnimalScreen from './src/screens/EditAnimalScreen';
 
 
 export default function App() {
   return (
     <View style={{ flex: 1}}>
-      <AdvancedInfo />
+      <EditAnimalScreen />
     </View>
   );
 }

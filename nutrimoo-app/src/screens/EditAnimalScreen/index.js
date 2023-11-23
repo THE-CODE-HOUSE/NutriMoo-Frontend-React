@@ -15,20 +15,50 @@ import {
 } from "react-native";
 
 import styles from "./styles";
-import { CustomDropDown } from "../../components/CustomDropDown";
 import { MaterialIcons } from "@expo/vector-icons";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { useState,useEffect } from "react";
-import DateTimePicker from '@react-native-community/datetimepicker';
-
+import { useState, useEffect } from "react";
+import { SelectList } from "react-native-dropdown-select-list";
 
 const EditAnimalScreen = () => {
+  const [date, setDate] = useState(new Date());
+  const [show, setShow] = useState(false);
+  const [mode, setMode] = useState("date");
+  const [animalType, setAnimalType] = React.useState("VL");
+  const [animalGoal, setAnimalGoal] = React.useState("MA");
+  const [animalStatus, setAnimalStatus] = React.useState("");
+  const animalGender = 'Touro';
 
-  const [date,setDate] = useState(new Date());
-  const [show,setShow] = useState(false);
-  const [mode,setMode] = useState('date');
+  const animalTypes = [
+    { key: "VL", value: "Vaca em lactação" },
+    { key: "BN", value: "Bezerra/Novilha" },
+    { key: "VA", value: "Vaca" },
+    { key: "BO", value: "Boi" },
+    { key: "TO", value: "Touro" },
+  ];
+  const animalGoals = [
+    { key: "GA", value: "Ganhar peso" },
+    { key: "MA", value: "Manter peso" },
+    { key: "PE", value: "Perder peso" },
+  ];
+  const optionsByGender = {
+    Touro: [
+      { key: "FE", value: "Fértil" },
+      { key: "NF", value: "Não fértil" },
+    ],
+    Vaca: [
+      { key: "FE", value: "Fértil" },
+      { key: "NF", value: "Não fértil" },
+      { key: "PR", value: "Prenha" },
+      { key: "NP", value: "Não prenha" },
+    ],
+    Boi: [{ key: "IN", value: "Infértil" }],
+    Novilha: [{ key: "IN", value:"Infértil"}],
+  };
 
-  const onChange = (event,selectedDate) =>{
+  const [options, setOptions] = React.useState(optionsByGender[animalGender]);
+
+  const onChange = (event, selectedDate) => {
     setDate(selectedDate);
     setShow(false);
   };
@@ -36,8 +66,7 @@ const EditAnimalScreen = () => {
   const showMode = (modeToShow) => {
     setShow(true);
     setMode(modeToShow);
-  }
-
+  };
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
@@ -48,15 +77,23 @@ const EditAnimalScreen = () => {
           source={require("../../../assets/images/background.png")}
           style={styles.image}
         >
-        <View style={styles.homeBar}>
-          <TouchableOpacity>
-            <View style={{ backgroundColor: "transparent" , marginLeft: 20}}>
-            <MaterialIcons name="menu" size={32} color="#073021" />
-            </View>
-          </TouchableOpacity>
-          <Text style= {{ fontSize: 24 , fontWeight: "bold", marginLeft: 45, color: '#073021' }}>EDITAR ANIMAL</Text>
-        </View>
-
+          <View style={styles.homeBar}>
+            <TouchableOpacity>
+              <View style={{ backgroundColor: "transparent", marginLeft: 20 }}>
+                <MaterialIcons name="menu" size={32} color="#073021" />
+              </View>
+            </TouchableOpacity>
+            <Text
+              style={{
+                fontSize: 24,
+                fontWeight: "bold",
+                marginLeft: 45,
+                color: "#073021",
+              }}
+            >
+              EDITAR ANIMAL
+            </Text>
+          </View>
 
           <View style={styles.retangulo}>
             <View
@@ -64,11 +101,20 @@ const EditAnimalScreen = () => {
                 styles.retangulo,
                 { opacity: 0.8, backgroundColor: "white", height: "100%" },
               ]}
-            >
-            </View>
+            ></View>
 
-            <Text style={{ marginTop: 10, fontSize: 18, color: "#073021", fontWeight: "bold", alignSelf: 'flex-start', marginLeft: 32.5  }}
-                >ID</Text>
+            <Text
+              style={{
+                marginTop: 10,
+                fontSize: 18,
+                color: "#073021",
+                fontWeight: "bold",
+                alignSelf: "flex-start",
+                marginLeft: 32.5,
+              }}
+            >
+              ID
+            </Text>
             <View style={styles.shadowBox}>
               {
                 <MaterialCommunityIcons
@@ -79,19 +125,50 @@ const EditAnimalScreen = () => {
                 />
               }
               <TextInput
-                placeholder="Número de Identificação"
+                placeholder="TAG 0012"
                 autoCorrect={false}
                 keyboardType="default"
                 style={styles.textinputWithIcon}
                 maxLength={40}
+                editable={false}
               />
             </View>
 
-            <CustomDropDown title={'ESTÁGIO'} zIndex={2000} titleColor={'#073021'} />
+            <Text style={styles.contText}>ESTÁGIO</Text>
+            <SelectList
+              setSelected={setAnimalType}
+              boxStyles={styles.selectList}
+              dropdownStyles={{ backgroundColor: "white" }}
+              data={animalTypes}
+              search={false}
+              placeholder={"Selecione um departamento"}
+              defaultOption={{ key: "VL", value: "Vaca em lactação" }}
+            />
 
-            <CustomDropDown title={'RAÇA'} zIndex={2000} titleColor={'#073021'} />
-            
-            
+            <Text style={styles.contText}>STATUS</Text>
+            {animalGender === "Boi" || animalGender === "Novilha" ? (
+              <View style={styles.shadowBox}>
+              <TextInput
+                placeholder={optionsByGender[animalGender][0].value}
+                autoCorrect={false}
+                keyboardType="default"
+                style={styles.textinputWithIcon}
+                maxLength={40}
+                editable={false}
+              />
+            </View>
+            ) : (
+              <SelectList
+                setSelected={setAnimalStatus}
+                boxStyles={styles.selectList}
+                dropdownStyles={{ backgroundColor: "white" }}
+                search={false}
+                data={options}
+                placeholder="Selecione uma meta"
+                defaultOption={options.length > 0 ? options[0] : null}
+              />
+            )}
+
             <Text style={styles.contText}>PESO</Text>
             <View style={styles.shadowBox}>
               {
@@ -111,36 +188,20 @@ const EditAnimalScreen = () => {
               />
             </View>
 
+            <Text style={styles.contText}>META</Text>
+            <SelectList
+              setSelected={setAnimalGoal}
+              boxStyles={styles.selectList}
+              dropdownStyles={{ backgroundColor: "white" }}
+              data={animalGoals}
+              search={false}
+              placeholder={"Selecione uma meta"}
+              defaultOption={{ key: "MA", value: "Manter peso" }}
+            />
 
-            <Text style={styles.contText}>DATA DE NASCIMENTO</Text>
-            <TouchableOpacity style={{  width: '85%',height: 50,marginTop: 10,borderRadius: 20, backgroundColor: "white",elevation: 15, alignItems: 'center', justifyContent: 'center'}} onPress={() => showMode('date') }>
-
-              {show && (
-                <DateTimePicker
-                testID="dateTimePicker"
-                value={date}
-                mode={'date'}
-                is24Hour={true}
-                display="default"
-                onChange={onChange}
-                maximumDate={new Date()}
-                minimumDate={new Date(1995, 1, 1)}
-                />
-              )}
-
-              <MaterialCommunityIcons
-                name={'calendar'}
-                style={{ color: '#000', fontSize: 24 }}
-              />
-
-              <Text style={{fontWeight: 'bold'}}>{date.toLocaleDateString('pt-BR')}</Text>
-            </TouchableOpacity>
-
-
-            <TouchableOpacity style={styles.button} >
+            <TouchableOpacity style={styles.button}>
               <Text style={styles.buttonText}>EDITAR</Text>
             </TouchableOpacity>
-
           </View>
         </ImageBackground>
       </SafeAreaView>
