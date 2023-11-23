@@ -64,6 +64,10 @@ const styles = StyleSheet.create({
     width: "100%", // Ajuste conforme necessário
     height: "100%", // Ajuste conforme necessário
   },
+  image: {
+    width: "100%", // Ajuste conforme necessário
+    height: "100%", // Ajuste conforme necessário
+  },
   textContainer: {
     backgroundColor:'white',
     borderRadius: 30,

@@ -18,7 +18,12 @@ import styles from "./styles";
 import { MaterialIcons } from "@expo/vector-icons";
 import { useState } from "react";
 
-const SelectAnimalType = () => {
+const SelectAnimalType = ({navigation}) => {
+
+  const openSelectGoal = () =>{
+    navigation.navigate('SelectCowNutritionGoal');
+  }
+
   return (
     <TouchableWithoutFeedback accessible={false}>
       <SafeAreaView style={styles.container}>
@@ -58,7 +63,7 @@ const SelectAnimalType = () => {
             ></View>
 
             <View style={styles.teste}>
-              <TouchableOpacity style={styles.button}>
+              <TouchableOpacity style={styles.button} onPress={openSelectGoal}>
                 <View style={styles.textContainer}>
                   <Text style={styles.text}>VACA EM LACTAÇÃO</Text>
                 </View>

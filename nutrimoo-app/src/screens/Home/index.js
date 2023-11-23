@@ -18,7 +18,16 @@ import styles from "./styles";
 import { MaterialIcons } from "@expo/vector-icons";
 import { useState } from "react";
 
-const HomeScreen = () => {
+const HomeScreen = ({navigation}) => {
+
+  const openListScreen = () => {
+    navigation.navigate('SelectAnimalType');
+  }
+
+  const openSignUp = () => {
+    navigation.navigate('SignUpScreen')
+  }
+
   return (
     <TouchableWithoutFeedback accessible={false}>
       <SafeAreaView style={styles.container}>
@@ -56,11 +65,11 @@ const HomeScreen = () => {
               ]}
             ></View>
 
-            <TouchableOpacity style={styles.button}>
+            <TouchableOpacity style={styles.button} onPress={openListScreen}>
               <View style={styles.iconContainer}>
                 <Image
                   source={require("../../../assets/images/cow.png")} // Substitua com o caminho correto da imagem
-                  style={styles.icon}
+                  style={styles.image}
                 />
               </View>
               <View style={styles.textContainer}>
@@ -72,7 +81,7 @@ const HomeScreen = () => {
               <View style={styles.iconContainer}>
                 <Image
                   source={require("../../../assets/images/diet.png")} // Substitua com o caminho correto da imagem
-                  style={styles.icon}
+                  style={styles.image}
                 />
               </View>
               <View style={styles.textContainer}>
@@ -80,7 +89,7 @@ const HomeScreen = () => {
               </View>
             </TouchableOpacity>
 
-            <TouchableOpacity style={styles.button}>
+            <TouchableOpacity style={styles.button} onPress={openSignUp}>
               <View style={styles.iconContainer}>
               <MaterialIcons name="add" size={92} color="#073021" />
               </View>

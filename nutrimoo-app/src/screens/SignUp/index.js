@@ -10,6 +10,7 @@ import {
   Keyboard,
   TouchableOpacity,
   ImageBackground,
+  ToastAndroid
 } from "react-native";
 
 import styles from "./styles";
@@ -18,7 +19,7 @@ import { MaterialIcons } from "@expo/vector-icons";
 import { useState } from "react";
 import { submitRegister } from "../../services/authService";
 
-const SignUpScreen = () => {
+const SignUpScreen = ({navigation}) => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -91,6 +92,10 @@ const SignUpScreen = () => {
       const departamentValue = getDepartmentValueByKey(departament);
 
       await submitRegister(email, password, roleValue, name, departamentValue);
+
+      ToastAndroid.show("Usuário cadastrado com sucesso!", ToastAndroid.SHORT);
+      navigation.navigate('Home');
+      
     } catch (error) {
       setErrorMessage("Erro ao fazer login. Por favor, tente novamente.");
       console.log(error);

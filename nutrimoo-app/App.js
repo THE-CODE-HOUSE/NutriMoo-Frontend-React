@@ -10,12 +10,14 @@ import SelectCowNutritionGoal from './src/screens/SelectCowNutritionGoal';
 import SelectAnimalType from './src/screens/SelectAnimalType';
 import AdvancedInfo from './src/screens/AdvancedInfo';
 import EditAnimalScreen from './src/screens/EditAnimalScreen';
+import HomeScreen from './src/screens/Home';
+import { Routes } from './src/routes';
 
 
 export default function App() {
   return (
     <View style={{ flex: 1}}>
-      <DietScreen />
+      <Routes />
     </View>
   );
 }
