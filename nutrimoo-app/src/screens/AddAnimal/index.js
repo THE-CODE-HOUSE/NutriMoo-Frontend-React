@@ -27,6 +27,12 @@ const AddAnimalScreen = () => {
   const [mode, setMode] = useState("date");
   const [animalType, setAnimalType] = React.useState("VL");
   const [animalBreed, setAnimalBreed] = React.useState("VL");
+  const [tag, setTag] = React.useState("");
+  const [weight, setWeight] = React.useState(0.0);
+  const regexRFID = /^076\d{12}$/;
+  const [errorMessage, setErrorMessage] = useState("");
+
+  
 
   const animalTypes = [
     { key: "VL", value: "Vaca em lactação" },
@@ -53,6 +59,26 @@ const AddAnimalScreen = () => {
   const showMode = (modeToShow) => {
     setShow(true);
     setMode(modeToShow);
+  };
+
+  const handleAdd = async() => {
+    if(tag === "" || !regexRFID.test(tag) ){
+      setErrorMessage(
+        tag === ""
+        ? "Por favor, insira o ID do animal."
+        : "ID Inválido. Verifique se está no formato correto."
+      )
+      return;
+    }
+    if (weight <= 15) {
+      setErrorMessage("Peso inválido. O peso está abaixo do mínimo esperado.");
+      return; 
+    } else if (weight >= 2000) {
+      setErrorMessage("Peso inválido. O peso está acima do máximo permitido.");
+      return; 
+    }
+    console.log("Processando dados válidos:", "ID:", tag,"Peso:", weight);
+    setErrorMessage("");
   };
 
   return (
@@ -115,6 +141,7 @@ const AddAnimalScreen = () => {
                 placeholder="Número de Identificação"
                 autoCorrect={false}
                 keyboardType="default"
+                onChangeText={(text)=> setTag(text)}
                 style={styles.textinputWithIcon}
                 maxLength={40}
               />
@@ -156,6 +183,7 @@ const AddAnimalScreen = () => {
                 placeholder="Peso em Kg"
                 autoCorrect={false}
                 keyboardType="numeric"
+                onChangeText={(text)=> setWeight(text)}
                 style={styles.textinputWithIcon}
                 maxLength={40}
               />
@@ -184,7 +212,7 @@ const AddAnimalScreen = () => {
                   display="default"
                   onChange={onChange}
                   maximumDate={new Date()}
-                  minimumDate={new Date(1995, 1, 1)}
+                  minimumDate={new Date(1970, 1, 1)}
                 />
               )}
 
@@ -197,8 +225,14 @@ const AddAnimalScreen = () => {
                 {date.toLocaleDateString("pt-BR")}
               </Text>
             </TouchableOpacity>
+            
+            {errorMessage ? (
+              <Text style={{ color: "red", marginTop: 10, fontWeight: "400" }}>
+                {errorMessage}
+              </Text>
+            ) : null}
 
-            <TouchableOpacity style={styles.button}>
+            <TouchableOpacity style={styles.button} onPress={handleAdd}>
               <Text style={styles.buttonText}>ADICIONAR</Text>
             </TouchableOpacity>
           </View>

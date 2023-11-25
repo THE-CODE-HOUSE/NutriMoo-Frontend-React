@@ -27,7 +27,23 @@ const EditAnimalScreen = () => {
   const [animalType, setAnimalType] = React.useState("VL");
   const [animalGoal, setAnimalGoal] = React.useState("MA");
   const [animalStatus, setAnimalStatus] = React.useState("");
+  const [weight, setWeight] = React.useState(0.0);
+  const [errorMessage, setErrorMessage] = useState("");
+
+
   const animalGender = 'Touro';
+
+  const handleEdit = async() => {
+    if (weight <= 15) {
+      setErrorMessage("Peso inválido. O peso está abaixo do mínimo esperado.");
+      return; 
+    } else if (weight >= 2000) {
+      setErrorMessage("Peso inválido. O peso está acima do máximo permitido.");
+      return; 
+    }
+    console.log("Processando dados válidos:", "Peso:", weight);
+    setErrorMessage("");
+  }; 
 
   const animalTypes = [
     { key: "VL", value: "Vaca em lactação" },
@@ -87,7 +103,7 @@ const EditAnimalScreen = () => {
               style={{
                 fontSize: 24,
                 fontWeight: "bold",
-                marginLeft: 45,
+                marginLeft: '20%',
                 color: "#073021",
               }}
             >
@@ -179,10 +195,11 @@ const EditAnimalScreen = () => {
                   style={styles.iconStyle}
                 />
               }
-              <TextInput
+               <TextInput
                 placeholder="Peso em Kg"
                 autoCorrect={false}
-                keyboardType="default"
+                keyboardType="numeric"
+                onChangeText={(text)=> setWeight(text)}
                 style={styles.textinputWithIcon}
                 maxLength={40}
               />
@@ -199,7 +216,13 @@ const EditAnimalScreen = () => {
               defaultOption={{ key: "MA", value: "Manter peso" }}
             />
 
-            <TouchableOpacity style={styles.button}>
+            {errorMessage ? (
+              <Text style={{ color: "red", marginTop: 10, fontWeight: "400" }}>
+                {errorMessage}
+              </Text>
+            ) : null}
+
+            <TouchableOpacity style={styles.button} onPress={handleEdit}>
               <Text style={styles.buttonText}>EDITAR</Text>
             </TouchableOpacity>
           </View>
