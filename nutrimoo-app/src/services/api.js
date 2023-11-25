@@ -2,7 +2,8 @@ import axios from 'axios';
 import {UserStorage} from "../storage/storage";
 
 const api = axios.create({
-    baseURL: 'http://10.0.2.2:8080'
+    baseURL: 'http://10.0.2.2:8080',
+    timeout: 10000,
 });
 
 api.interceptors.request.use(

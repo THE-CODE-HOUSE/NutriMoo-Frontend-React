@@ -26,11 +26,10 @@ async function submitLogin(email, password) {
         headers: { requiresAuth: false },
       }
     );
-
     //Aqui o json que vem da api é guardada no async storage
     UserStorage.setUser(response.data);
   } catch (error) {
-    console.error("Erro no login", error);
+      throw new Error(error);
   }
 }
 

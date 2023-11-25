@@ -16,6 +16,13 @@ const UserStorage = {
             // Tratar erro
             return null;
         }
+    },
+    removeUser: async () => {
+        try {
+            await AsyncStorage.removeItem('user');
+        } catch (e) {
+            // Tratar erro
+        }
     }
 };
 

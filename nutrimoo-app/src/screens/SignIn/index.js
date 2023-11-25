@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import { StatusBar } from "expo-status-bar";
 import {
   Text,
@@ -17,10 +17,31 @@ import { MaterialIcons } from "@expo/vector-icons";
 import { useState } from "react";
 import {UserStorage} from "../../storage/storage";
 import {submitLogin} from "../../services/authService";
+import { useAuth } from "../../context/authContext";
 
 const SignInScreen = () => {
+
+  useEffect(() => {
+    const autoLogin = async () => {
+      try {
+        const token = await UserStorage.getUser();
+
+        if (token) {
+          login(token);
+        }
+      } catch (error) {
+        console.error('Falha ao tentar o login automático:', error);
+        // Lidar com o erro, por exemplo, definindo um estado para mostrar uma mensagem de erro
+      }
+    };
+
+    autoLogin();
+  }, [login]);
+
+  const { login } = useAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [userData, setUserData] = useState("");
   const [hidePassword, setHidePassword] = useState(true);
   const [errorMessage, setErrorMessage] = useState("");
   const regexEmail = /^[A-Za-z0-9._%-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$/;
@@ -40,13 +61,14 @@ const SignInScreen = () => {
     setErrorMessage("");
   
     try {
-      console.log(await UserStorage.getUser());
       await submitLogin(email, password);
-      console.log(await UserStorage.getUser());
+      setUserData(await UserStorage.getUser());
+      await login(userData.token);
     } catch (error) {
       setErrorMessage("Erro ao fazer login. Por favor, tente novamente.");
       console.log(error);
     } finally {
+
     }
   }
 
