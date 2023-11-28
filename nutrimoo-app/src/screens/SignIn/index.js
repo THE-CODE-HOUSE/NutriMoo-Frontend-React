@@ -21,27 +21,11 @@ import { useAuth } from "../../context/authContext";
 
 const SignInScreen = () => {
 
-  useEffect(() => {
-    const autoLogin = async () => {
-      try {
-        const token = await UserStorage.getUser();
-
-        if (token) {
-          login(token);
-        }
-      } catch (error) {
-        console.error('Falha ao tentar o login automático:', error);
-        // Lidar com o erro, por exemplo, definindo um estado para mostrar uma mensagem de erro
-      }
-    };
-
-    autoLogin();
-  }, [login]);
+  
 
   const { login } = useAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [userData, setUserData] = useState("");
   const [hidePassword, setHidePassword] = useState(true);
   const [errorMessage, setErrorMessage] = useState("");
   const regexEmail = /^[A-Za-z0-9._%-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$/;
@@ -62,7 +46,7 @@ const SignInScreen = () => {
   
     try {
       await submitLogin(email, password);
-      setUserData(await UserStorage.getUser());
+      const userData = await UserStorage.getUser()
       await login(userData.token);
     } catch (error) {
       setErrorMessage("Erro ao fazer login. Por favor, tente novamente.");

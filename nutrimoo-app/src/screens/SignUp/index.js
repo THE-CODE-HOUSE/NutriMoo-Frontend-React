@@ -10,7 +10,7 @@ import {
   Keyboard,
   TouchableOpacity,
   ImageBackground,
-  ToastAndroid
+  ToastAndroid,
 } from "react-native";
 
 import styles from "./styles";
@@ -19,7 +19,7 @@ import { MaterialIcons } from "@expo/vector-icons";
 import { useState } from "react";
 import { submitRegister } from "../../services/authService";
 
-const SignUpScreen = ({navigation}) => {
+const SignUpScreen = ({ navigation }) => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -87,15 +87,17 @@ const SignUpScreen = ({navigation}) => {
     // Se chegou até aqui, ambos os campos estão preenchidos.
     setErrorMessage(""); // Limpar mensagem de erro.
     try {
-      console.log(getRoleValueByKey(role), getDepartmentValueByKey(departament));
+      console.log(
+        getRoleValueByKey(role),
+        getDepartmentValueByKey(departament)
+      );
       const roleValue = getRoleValueByKey(role);
       const departamentValue = getDepartmentValueByKey(departament);
 
       await submitRegister(email, password, roleValue, name, departamentValue);
 
       ToastAndroid.show("Usuário cadastrado com sucesso!", ToastAndroid.SHORT);
-      navigation.navigate('Home');
-      
+      navigation.navigate("Home");
     } catch (error) {
       setErrorMessage("Erro ao fazer login. Por favor, tente novamente.");
       console.log(error);
@@ -119,6 +121,7 @@ const SignUpScreen = ({navigation}) => {
                 marginTop: 30,
                 marginLeft: 20,
               }}
+              onPress={() => navigation.goBack()}
             >
               <MaterialIcons name="arrow-back" size={32} color="#073021" />
             </TouchableOpacity>

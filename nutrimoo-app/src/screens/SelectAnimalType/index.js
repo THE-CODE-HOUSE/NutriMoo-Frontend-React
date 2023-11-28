@@ -18,11 +18,10 @@ import styles from "./styles";
 import { MaterialIcons } from "@expo/vector-icons";
 import { useState } from "react";
 
-const SelectAnimalType = ({navigation}) => {
-
-  const openSelectGoal = () =>{
-    navigation.navigate('SelectCowNutritionGoal');
-  }
+const SelectAnimalType = ({ navigation }) => {
+  const openSelectGoal = () => {
+    navigation.navigate("SelectCowNutritionGoal");
+  };
 
   return (
     <TouchableWithoutFeedback accessible={false}>
@@ -34,16 +33,21 @@ const SelectAnimalType = ({navigation}) => {
           style={styles.container}
         >
           <View style={styles.homeBar}>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={() => navigation.goBack()}>
               <View style={{ backgroundColor: "transparent", margin: 20 }}>
                 <MaterialIcons name="arrow-back" size={32} color="#073021" />
               </View>
             </TouchableOpacity>
 
             <Text
-              style={{ fontSize: 24, fontWeight: "bold", color: "#073021", marginTop: 22}}
+              style={{
+                fontSize: 24,
+                fontWeight: "bold",
+                color: "#073021",
+                marginTop: 22,
+              }}
             >
-              TIPO DE {'\n'}
+              TIPO DE {"\n"}
               ANIMAL
             </Text>
 
@@ -69,7 +73,7 @@ const SelectAnimalType = ({navigation}) => {
                 </View>
               </TouchableOpacity>
 
-              <TouchableOpacity style={styles.button}>
+              <TouchableOpacity style={styles.button} onPress={openSelectGoal}>
                 <View style={styles.textContainer}>
                   <Text style={styles.text}>BEZERRA/ NOVILHA</Text>
                 </View>
@@ -77,13 +81,13 @@ const SelectAnimalType = ({navigation}) => {
             </View>
 
             <View style={styles.teste}>
-              <TouchableOpacity style={styles.button}>
+              <TouchableOpacity style={styles.button} onPress={openSelectGoal}>
                 <View style={styles.textContainer}>
                   <Text style={styles.text}>VACA</Text>
                 </View>
               </TouchableOpacity>
 
-              <TouchableOpacity style={styles.button}>
+              <TouchableOpacity style={styles.button} onPress={openSelectGoal}>
                 <View style={styles.textContainer}>
                   <Text style={styles.text}>BOI</Text>
                 </View>
@@ -91,7 +95,7 @@ const SelectAnimalType = ({navigation}) => {
             </View>
 
             <View style={styles.teste}>
-              <TouchableOpacity style={styles.button}>
+              <TouchableOpacity style={styles.button} onPress={openSelectGoal}>
                 <View style={styles.textContainer}>
                   <Text style={styles.text}>TOURO</Text>
                 </View>
@@ -103,7 +107,6 @@ const SelectAnimalType = ({navigation}) => {
                 </View>
               </TouchableOpacity>
             </View>
-
           </View>
         </ImageBackground>
       </SafeAreaView>

@@ -34,7 +34,7 @@ const SelectCowNutritionGoal = ({navigation}) => {
           style={styles.container}
         >
           <View style={styles.homeBar}>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={() => navigation.goBack()}>
               <View style={{ backgroundColor: "transparent", margin: 20 }}>
                 <MaterialIcons name="arrow-back" size={32} color="#073021" />
               </View>

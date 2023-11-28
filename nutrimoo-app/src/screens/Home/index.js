@@ -25,7 +25,11 @@ const HomeScreen = ({navigation}) => {
   }
 
   const openSignUp = () => {
-    navigation.navigate('SignUpScreen')
+    navigation.navigate('SignUpScreen');
+  }
+
+  const openSelectTypeDiet = () => {
+    navigation.navigate('SelectAnimalTypeDiet');
   }
 
   return (
@@ -77,7 +81,7 @@ const HomeScreen = ({navigation}) => {
               </View>
             </TouchableOpacity>
 
-            <TouchableOpacity style={styles.button}>
+            <TouchableOpacity style={styles.button} onPress={openSelectTypeDiet}>
               <View style={styles.iconContainer}>
                 <Image
                   source={require("../../../assets/images/diet.png")} // Substitua com o caminho correto da imagem

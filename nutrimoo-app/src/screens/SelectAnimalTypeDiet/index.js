@@ -18,7 +18,7 @@ import styles from "./styles";
 import { MaterialIcons } from "@expo/vector-icons";
 import { useState } from "react";
 
-const SelectAnimalTypeDiet = () => {
+const SelectAnimalTypeDiet = ({navigation}) => {
   return (
     <TouchableWithoutFeedback accessible={false}>
       <SafeAreaView style={styles.container}>
@@ -29,8 +29,8 @@ const SelectAnimalTypeDiet = () => {
           style={styles.container}
         >
           <View style={styles.homeBar}>
-            <TouchableOpacity>
-              <View style={{ backgroundColor: "transparent", margin: 20 }}>
+            <TouchableOpacity onPress={() => navigation.goBack()}>
+              <View style={{ backgroundColor: "transparent", margin: 20 }} >
                 <MaterialIcons name="arrow-back" size={32} color="#073021" />
               </View>
             </TouchableOpacity>
