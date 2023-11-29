@@ -12,6 +12,7 @@ import {
   ImageBackground,
   Modal,
   Button,
+  ToastAndroid,
 } from "react-native";
 
 import styles from "./styles";
@@ -20,6 +21,7 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { useState, useEffect } from "react";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import { SelectList } from "react-native-dropdown-select-list";
+import { addAnimal } from "../../services/animalService";
 
 const AddAnimalScreen = () => {
   const [date, setDate] = useState(new Date());
@@ -51,6 +53,16 @@ const AddAnimalScreen = () => {
     { key: "CH", value: "Charolês" }
   ];
 
+  function getAnimalTypeValueByKey(keyToFind){
+    const animalTypeEntry = animalTypes.find(({key})=> key ===keyToFind);
+    return animalTypeEntry ? animalTypeEntry.value : null;
+  }
+
+  function getAnimalBreedValueByKey(keyToFind){
+    const animalBreedsEntry = animalBreeds.find(({key})=> key ===keyToFind);
+    return animalBreedsEntry ? animalBreedsEntry.value : null;
+  }
+
   const onChange = (event, selectedDate) => {
     setDate(selectedDate);
     setShow(false);
@@ -77,8 +89,24 @@ const AddAnimalScreen = () => {
       setErrorMessage("Peso inválido. O peso está acima do máximo permitido.");
       return; 
     }
-    console.log("Processando dados válidos:", "ID:", tag,"Peso:", weight);
     setErrorMessage("");
+    try{
+      const animalBreedValue = getAnimalBreedValueByKey(animalBreed).toUpperCase();
+      const animalTypeValue = getAnimalTypeValueByKey(animalType).toUpperCase();
+      var gender = "FEMALE";
+      if(animalType == "BO"|| animalType == "TO"){
+        gender = "MALE";
+      }
+      
+      await addAnimal(tag, animalTypeValue, animalBreedValue, gender, weight,date);
+
+      ToastAndroid.show("Animal Adicionado com Sucesso!", ToastAndroid.SHORT);
+      
+    }catch (error) {
+      setErrorMessage("Erro ao Adicionar Animal. Por favor, tente novamente.");
+      console.log(error);
+    } finally {
+    }
   };
 
   return (
