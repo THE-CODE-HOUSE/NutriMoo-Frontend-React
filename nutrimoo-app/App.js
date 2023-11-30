@@ -18,7 +18,7 @@ export default function App() {
   return (
     <AuthProvider>
       <View style={{ flex: 1 }}>
-        <Routes />
+        <EditAnimalScreen/>
       </View>
     </AuthProvider>
   );
