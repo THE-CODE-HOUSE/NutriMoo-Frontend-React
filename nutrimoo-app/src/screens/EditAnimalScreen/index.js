@@ -31,8 +31,6 @@ const EditAnimalScreen = () => {
   const [errorMessage, setErrorMessage] = useState("");
 
 
-  const animalGender = 'Touro';
-
   const handleEdit = async() => {
     if (weight <= 15) {
       setErrorMessage("Peso inválido. O peso está abaixo do mínimo esperado.");
@@ -58,21 +56,23 @@ const EditAnimalScreen = () => {
     { key: "PE", value: "Perder peso" },
   ];
   const optionsByGender = {
-    Touro: [
+    TO: [
       { key: "FE", value: "Fértil" },
       { key: "NF", value: "Não fértil" },
     ],
-    Vaca: [
+    VA: [
       { key: "FE", value: "Fértil" },
       { key: "NF", value: "Não fértil" },
       { key: "PR", value: "Prenha" },
       { key: "NP", value: "Não prenha" },
     ],
-    Boi: [{ key: "IN", value: "Infértil" }],
-    Novilha: [{ key: "IN", value:"Infértil"}],
+    BO: [{ key: "IN", value: "Infértil" }],
+    BN: [{ key: "IN", value:"Infértil"}],
+    VL: [
+      { key: "FE", value: "Fértil" },
+      { key: "NF", value: "Não fértil" },
+    ],
   };
-
-  const [options, setOptions] = React.useState(optionsByGender[animalGender]);
 
   const onChange = (event, selectedDate) => {
     setDate(selectedDate);
@@ -162,10 +162,10 @@ const EditAnimalScreen = () => {
             />
 
             <Text style={styles.contText}>STATUS</Text>
-            {animalGender === "Boi" || animalGender === "Novilha" ? (
+            {animalType === "BO" || animalType === "BN" ? (
               <View style={styles.shadowBox}>
               <TextInput
-                placeholder={optionsByGender[animalGender][0].value}
+                placeholder={optionsByGender[animalType][0].value}
                 autoCorrect={false}
                 keyboardType="default"
                 style={styles.textinputWithIcon}
@@ -179,9 +179,9 @@ const EditAnimalScreen = () => {
                 boxStyles={styles.selectList}
                 dropdownStyles={{ backgroundColor: "white" }}
                 search={false}
-                data={options}
+                data={optionsByGender[animalType]}
                 placeholder="Selecione uma meta"
-                defaultOption={options.length > 0 ? options[0] : null}
+                defaultOption={optionsByGender[animalType].length > 0 ? optionsByGender[animalType][0] : null}
               />
             )}
 
