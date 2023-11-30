@@ -16,8 +16,10 @@ import { AuthProvider } from "./src/context/authContext";
 
 export default function App() {
   return (
-    <View style={{ flex: 1}}>
-      <ListScreen />
-    </View>
+    <AuthProvider>
+      <View style={{ flex: 1 }}>
+        <EditAnimalScreen/>
+      </View>
+    </AuthProvider>
   );
 }
