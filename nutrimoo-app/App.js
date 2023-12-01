@@ -13,12 +13,13 @@ import EditAnimalScreen from "./src/screens/EditAnimalScreen";
 import HomeScreen from "./src/screens/Home";
 import { Routes } from "./src/routes";
 import { AuthProvider } from "./src/context/authContext";
+import AnimalInfo from "./src/screens/AnimalInfo";
 
 export default function App() {
   return (
     <AuthProvider>
       <View style={{ flex: 1 }}>
-        <EditAnimalScreen/>
+        <AdvancedInfo/>
       </View>
     </AuthProvider>
   );
