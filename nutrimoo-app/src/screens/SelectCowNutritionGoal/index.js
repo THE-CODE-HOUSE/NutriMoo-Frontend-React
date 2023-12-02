@@ -18,10 +18,16 @@ import styles from "./styles";
 import { MaterialIcons } from "@expo/vector-icons";
 import { useState } from "react";
 
-const SelectCowNutritionGoal = ({navigation}) => {
+const SelectCowNutritionGoal = ({navigation, route}) => {
+  
+  const { animalStage } = route.params;
+  
+  console.log(animalStage);
 
-  const openList = () => {
-    navigation.navigate('List');
+
+  const openList = (animalGoal) => {
+    console.log(animalStage);
+    navigation.navigate('List', {animalStage, animalGoal});
   }
 
   return (
@@ -62,19 +68,19 @@ const SelectCowNutritionGoal = ({navigation}) => {
             ></View>
 
             <View style={styles.buttonContainer}>
-              <TouchableOpacity style={styles.button} onPress={openList}>
+              <TouchableOpacity style={styles.button} onPress={() => openList("Ganhar Peso")}>
                 <View style={styles.textContainer}>
                   <Text style={styles.text}>GANHAR PESO</Text>
                 </View>
               </TouchableOpacity>
 
-              <TouchableOpacity style={styles.button}>
+              <TouchableOpacity style={styles.button} onPress={() => openList("Manter Peso")}>
                 <View style={styles.textContainer}>
                   <Text style={styles.text}>MANTER PESO</Text>
                 </View>
               </TouchableOpacity>
 
-              <TouchableOpacity style={styles.button}>
+              <TouchableOpacity style={styles.button} onPress={() => openList("Perder Peso")}>
                 <View style={styles.textContainer}>
                   <Text style={styles.text}>PERDER PESO</Text>
                 </View>

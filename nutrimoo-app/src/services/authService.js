@@ -42,6 +42,8 @@ async function submitRegister(email, password, role, name, department) {
     //console.log(mappedRole)
     role = mappedRole
 
+    
+
     //Aqui a rota de registrar é chamada por axios
     const response = await api.post("/auth/register", {
       email,
@@ -54,6 +56,7 @@ async function submitRegister(email, password, role, name, department) {
     //Aqui o json que vem da api é guardada no async storage
   } catch (error) {
     console.error("Erro no login", error);
+    throw new Error(error);
   }
 }
 

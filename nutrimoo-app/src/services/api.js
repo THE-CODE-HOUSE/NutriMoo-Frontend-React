@@ -11,9 +11,9 @@ api.interceptors.request.use(
         // Verifica se a requisição requer autenticação
         if (config.headers.requiresAuth !== false) {
             const user = await UserStorage.getUser();
-            console.log(user.token)
-            if (user && user.token) {
-                config.headers.Authorization = `Bearer ${user.token}`;
+            console.log(user)
+            if (user) {
+                config.headers.Authorization = `Bearer ${user}`;
             }
         }
 

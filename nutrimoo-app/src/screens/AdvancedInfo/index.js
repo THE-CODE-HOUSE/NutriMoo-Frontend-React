@@ -25,6 +25,11 @@ const AdvancedInfo = () => {
 
     const [progress, setProgress] = useState(0.5);
 
+    const onClose = () => {
+      //navigation.navigate('ListScreen');
+      console.log("Voltando pra tela de lista")
+    }
+
 
   return (
     <TouchableWithoutFeedback accessible={false}>
@@ -36,7 +41,7 @@ const AdvancedInfo = () => {
         style={styles.container}>
 
             <View style={styles.homeBar}>
-                  <TouchableOpacity style= {{marginTop: 30, marginLeft: 20}}>
+                  <TouchableOpacity style= {{marginTop: 30, marginLeft: 20}}onPress={onClose}> 
                     <View style={{ backgroundColor: "transparent" }}>
                         <MaterialIcons name="arrow-back" size={32} color="#073021" />
                     </View>
@@ -126,7 +131,7 @@ const AdvancedInfo = () => {
                     </View>
 
                     
-                          <TouchableOpacity style={{backgroundColor: '#345A48', borderRadius: 25, width: '30%', height: '10%', marginTop:'3%',alignItems: 'center',justifyContent:'center', elevation: 10}}>
+                          <TouchableOpacity style={{backgroundColor: '#345A48', borderRadius: 25, width: '30%', height: '10%', marginTop:'3%',alignItems: 'center',justifyContent:'center', elevation: 10}} onPress={onClose}>
                             <Text style={{color:'white', fontSize: 14, textAlign: 'center'}}>Concluído</Text>
                           </TouchableOpacity>
                     

@@ -39,4 +39,16 @@ async function updateAnimal(tag, stage, fertile, pregnant, weight, goal){
     }
 }
 
-export { addAnimal, updateAnimal };
+async function fetchAndStoreAnimals() {
+    try {
+        const response = await api.get("/api/cattle/all");
+        const animals = response.data;
+        AnimalStorage.setAnimals(animals);
+    } catch (e) {
+        console.error("Erro ao buscar e armazenar animais", e);
+    }
+}
+
+
+export { addAnimal, updateAnimal, fetchAndStoreAnimals };
+
