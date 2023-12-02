@@ -17,18 +17,20 @@ import { ImageBackground } from "react-native";
 import styles from "./styles";
 import { MaterialIcons } from "@expo/vector-icons";
 import { AnimalStorage } from "../../storage/storage";
+import { fetchAndStoreAnimals } from "../../services/animalService";
 
-const ListScreen = () => {
+const ListScreen = ({navigation,route}) => {
   const [data, setData] = useState([]);
+  const {animalStage, animalGoal} = route.params;
+  console.log(animalStage);
+  console.log(animalGoal);
 
   useEffect(() => {
     const fetchData = async () => {
-      const apiData = await cowData();
-      console.log(apiData);
+      await fetchAndStoreAnimals();
+      console.log(await AnimalStorage.getAnimals());
 
-      AnimalStorage.setAnimals(apiData);
-
-      setData(apiData);
+      setData(await AnimalStorage.getAnimals());
     };
 
     fetchData();
@@ -47,17 +49,39 @@ const ListScreen = () => {
     loadData();
   }, []);
 
-  const renderItem = ({ item }) => (
-    <TouchableOpacity
-      style={[styles.customButton, { backgroundColor: item.cor1 }]}
-    >
-      <View style={[styles.rectangle, { backgroundColor: item.cor2 }]}>
-        <Text style={{ fontWeight: "bold", fontSize: 20 }}> ID </Text>
-        <Text style={{ fontSize: 16 }}> Raça </Text>
-        <Text style={{ fontSize: 16 }}> Estado </Text>
-      </View>
-    </TouchableOpacity>
-  );
+  const renderItem = ({ item }) => {
+
+    let cor1, cor2;
+
+    // Definindo as cores baseadas no gênero
+    if (item.gender === "Macho") {
+        cor2 = "#afe3eb";
+        cor1 = "#c3f1f8";
+    } else if (item.gender === "Fêmea") {
+        cor2 = "#f8d7da";
+        cor1 = "#f5b7b1";
+    } else { // Indefinido ou outro valor
+        cor2 = "#f0f0f0";
+        cor1 = "#d6d6d6";
+    }
+
+    if (((item.goal === animalGoal) && (item.stage === animalStage)) || animalStage === "ALL") {
+      return (
+        <TouchableOpacity
+          style={[styles.customButton, { backgroundColor: cor1 }]}
+        >
+          <View style={[styles.rectangle, { backgroundColor: cor2 }]}>
+            <Text style={{ fontWeight: "bold", fontSize: 20 }}> {item.tag} </Text>
+            <Text style={{ fontSize: 16 }}> {item.breed} </Text>
+            <Text style={{ fontSize: 16 }}> {item.stage} </Text>
+          </View>
+        </TouchableOpacity>
+      );
+    } else {
+      // Se o item não tem o goal desejado, retorna null para não renderizar nada
+      return null;
+    }
+  };
 
   return (
     <TouchableWithoutFeedback accessible={false}>
@@ -69,9 +93,9 @@ const ListScreen = () => {
           style={styles.container}
         >
           <View style={styles.homeBar}>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={() => navigation.goBack()}>
               <View style={{ backgroundColor: "transparent", margin: 20 }}>
-                <MaterialIcons name="menu" size={32} color="#073021" />
+                <MaterialIcons name="arrow-back" size={32} color="#073021" />
               </View>
             </TouchableOpacity>
 
@@ -98,7 +122,7 @@ const ListScreen = () => {
                 style={styles.listAnimals}
                 data={data}
                 renderItem={renderItem}
-                keyExtractor={(item) => item.id.toString()}
+                keyExtractor={(item) => item.tag.toString()}
               />
             </View>
           </View>
@@ -115,6 +139,7 @@ const cowData = async () => {
       tag: "0001",
       breed: "Holandes",
       stage: "Novilha",
+      goal: "manter peso",
       cor1: "#afe3eb",
       cor2: "#c3f1f8",
     },
@@ -123,14 +148,16 @@ const cowData = async () => {
       tag: "0001",
       breed: "Gemana",
       stage: "Boi",
-      cor1: '#ebb9bb',
-      cor2: '#f9c6c7',
+      goal: "Manter Peso",
+      cor1: "#afe3eb",
+      cor2: "#c3f1f8",
     },
     {
       id: 3,
       tag: "0001",
       breed: "Brasileira",
-      stage: "Vaca",
+      goal: "Manter Peso",
+      stage: "VACA",
       cor1: "#afe3eb",
       cor2: "#c3f1f8",
     },
@@ -138,7 +165,8 @@ const cowData = async () => {
       id: 4,
       tag: "0001",
       breed: "Brasileira",
-      stage: "Vaca",
+      stage: "Vaca em Lactação",
+      goal: "Ganhar Peso",
       cor1: '#ebb9bb',
       cor2: '#f9c6c7',
     },

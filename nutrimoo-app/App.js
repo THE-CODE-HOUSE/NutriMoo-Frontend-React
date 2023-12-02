@@ -19,7 +19,7 @@ export default function App() {
   return (
     <AuthProvider>
       <View style={{ flex: 1 }}>
-        <AdvancedInfo/>
+        <Routes/>
       </View>
     </AuthProvider>
   );
