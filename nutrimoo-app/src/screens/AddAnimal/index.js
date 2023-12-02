@@ -23,7 +23,7 @@ import DateTimePicker from "@react-native-community/datetimepicker";
 import { SelectList } from "react-native-dropdown-select-list";
 import { addAnimal } from "../../services/animalService";
 
-const AddAnimalScreen = () => {
+const AddAnimalScreen = ({navigation}) => {
   const [date, setDate] = useState(new Date());
   const [show, setShow] = useState(false);
   const [mode, setMode] = useState("date");
@@ -99,6 +99,7 @@ const AddAnimalScreen = () => {
       }
     
       await addAnimal(tag, animalTypeValue, animalBreedValue, gender, weight, date);
+      navigation.goBack();
       ToastAndroid.show("Animal Adicionado com Sucesso!", ToastAndroid.SHORT);
   
     }catch (error) {
@@ -122,9 +123,9 @@ const AddAnimalScreen = () => {
           style={styles.image}
         >
           <View style={styles.homeBar}>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={() => navigation.goBack()}>
               <View style={{ backgroundColor: "transparent", marginLeft: 20 }}>
-                <MaterialIcons name="menu" size={32} color="#073021" />
+              <MaterialIcons name="arrow-back" size={32} color="#073021" />
               </View>
             </TouchableOpacity>
             <Text

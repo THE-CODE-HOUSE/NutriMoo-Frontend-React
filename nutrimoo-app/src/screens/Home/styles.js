@@ -48,7 +48,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#9BFF99",
     borderRadius: 30,
     elevation: 5,
-    marginTop: 70
+    marginTop: 50
   },
   iconContainer: {
     width:"33%",

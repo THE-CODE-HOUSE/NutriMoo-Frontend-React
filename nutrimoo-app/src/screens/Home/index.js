@@ -32,6 +32,10 @@ const HomeScreen = ({navigation}) => {
     navigation.navigate('SelectAnimalTypeDiet');
   }
 
+  const openAddAnimalScreen = () =>{
+    navigation.navigate('AddAnimalScreen');
+  }
+
   return (
     <TouchableWithoutFeedback accessible={false}>
       <SafeAreaView style={styles.container}>
@@ -78,6 +82,18 @@ const HomeScreen = ({navigation}) => {
               </View>
               <View style={styles.textContainer}>
                 <Text style={styles.text}>LISTA DE ANIMAIS</Text>
+              </View>
+            </TouchableOpacity>
+
+            <TouchableOpacity style={styles.button} onPress={openAddAnimalScreen}>
+              <View style={styles.iconContainer}>
+                <Image
+                  source={require("../../../assets/images/cow.png")} // Substitua com o caminho correto da imagem
+                  style={styles.image}
+                />
+              </View>
+              <View style={styles.textContainer}>
+                <Text style={styles.text}>ADCIONAR ANIMAL</Text>
               </View>
             </TouchableOpacity>
 
