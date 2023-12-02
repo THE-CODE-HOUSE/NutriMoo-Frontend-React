@@ -91,20 +91,23 @@ const AddAnimalScreen = () => {
     }
     setErrorMessage("");
     try{
-      const animalBreedValue = getAnimalBreedValueByKey(animalBreed).toUpperCase();
-      const animalTypeValue = getAnimalTypeValueByKey(animalType).toUpperCase();
-      var gender = "FEMALE";
+      const animalBreedValue = getAnimalBreedValueByKey(animalBreed);
+      const animalTypeValue = getAnimalTypeValueByKey(animalType);
+      var gender = "Fêmea";
       if(animalType == "BO"|| animalType == "TO"){
-        gender = "MALE";
+        gender = "Macho";
       }
-      
-      await addAnimal(tag, animalTypeValue, animalBreedValue, gender, weight,date);
-
+    
+      await addAnimal(tag, animalTypeValue, animalBreedValue, gender, weight, date);
       ToastAndroid.show("Animal Adicionado com Sucesso!", ToastAndroid.SHORT);
-      
+  
     }catch (error) {
+      if (error.message === "A tag já existe") {
+        setErrorMessage("A tag já está em uso. Por favor, tente novamente.");
+    }else{
       setErrorMessage("Erro ao Adicionar Animal. Por favor, tente novamente.");
       console.log(error);
+    }
     } finally {
     }
   };
