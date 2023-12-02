@@ -21,11 +21,13 @@ import { useState, useEffect } from "react";
 import { SelectList } from "react-native-dropdown-select-list";
 import { updateAnimal } from "../../services/animalService";
 
-const EditAnimalScreen = () => {
+const EditAnimalScreen = ({navigation,route}) => {
   const [date, setDate] = useState(new Date());
   const [show, setShow] = useState(false);
   const [mode, setMode] = useState("date");
   const [errorMessage, setErrorMessage] = useState("");
+  const {animalData} = route.params;
+  console.log(animalData);
   
   const vacaTeste = {
       "tag": "076000000000018",
@@ -164,9 +166,9 @@ const EditAnimalScreen = () => {
           style={styles.image}
         >
           <View style={styles.homeBar}>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={() => navigation.goBack()}>
               <View style={{ backgroundColor: "transparent", marginLeft: 20 }}>
-                <MaterialIcons name="menu" size={32} color="#073021" />
+              <MaterialIcons name="arrow-back" size={32} color="#073021" />
               </View>
             </TouchableOpacity>
             <Text

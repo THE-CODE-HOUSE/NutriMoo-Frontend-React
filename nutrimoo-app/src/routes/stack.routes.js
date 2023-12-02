@@ -11,6 +11,9 @@ import SelectAnimalType from "../screens/SelectAnimalType";
 import SelectCowNutritionGoal from "../screens/SelectCowNutritionGoal";
 import SignUpScreen from "../screens/SignUp";
 import SelectAnimalTypeDiet from '../screens/SelectAnimalTypeDiet';
+import AnimalInfo from '../screens/AnimalInfo';
+import AdvancedInfo from '../screens/AdvancedInfo';
+import EditAnimalScreen from '../screens/EditAnimalScreen';
 
 import { UserStorage } from '../storage/storage';
 import "core-js/stable/atob";
@@ -69,6 +72,9 @@ const StackRoutes = () => {
       <Screen name="SelectCowNutritionGoal" component={SelectCowNutritionGoal} />
       <Screen name="SignUpScreen" component={SignUpScreen} />
       <Screen name="SelectAnimalTypeDiet" component={SelectAnimalTypeDiet} />
+      <Screen name="AnimalInfo" component={AnimalInfo} />
+      <Screen name="AdvancedInfo" component={AdvancedInfo} />
+      <Screen name="EditAnimalScreen" component={EditAnimalScreen} />
     </Navigator>
   );
 };

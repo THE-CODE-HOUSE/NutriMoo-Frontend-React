@@ -49,14 +49,19 @@ const ListScreen = ({navigation,route}) => {
     loadData();
   }, []);
 
+  const openInfo = (animalData) => {
+    console.log(animalData);
+    navigation.navigate('AnimalInfo',{animalData});
+  };
+
   const renderItem = ({ item }) => {
 
     let cor1, cor2;
 
     // Definindo as cores baseadas no gênero
     if (item.gender === "Macho") {
-        cor2 = "#afe3eb";
-        cor1 = "#c3f1f8";
+        cor1 = "#afe3eb";
+        cor2 = "#c3f1f8";
     } else if (item.gender === "Fêmea") {
         cor2 = "#f8d7da";
         cor1 = "#f5b7b1";
@@ -69,6 +74,7 @@ const ListScreen = ({navigation,route}) => {
       return (
         <TouchableOpacity
           style={[styles.customButton, { backgroundColor: cor1 }]}
+          onPress={() => openInfo(item)}
         >
           <View style={[styles.rectangle, { backgroundColor: cor2 }]}>
             <Text style={{ fontWeight: "bold", fontSize: 20 }}> {item.tag} </Text>
