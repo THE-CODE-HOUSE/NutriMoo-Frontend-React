@@ -21,10 +21,9 @@ import { useState } from "react";
 const SelectAnimalType = ({ navigation }) => {
   const openSelectGoal = (animalStage) => {
     const from = "Animal";
-    navigation.navigate("SelectCowNutritionGoal", { animalStage,from });
+    navigation.navigate("SelectCowNutritionGoal", { animalStage, from });
   };
   const openList = (animalStage) => {
-    console.log(animalStage);
     navigation.navigate("List", { animalStage });
   };
 
@@ -38,9 +37,7 @@ const SelectAnimalType = ({ navigation }) => {
           style={styles.container}
         >
           <View style={styles.homeBar}>
-            <TouchableOpacity
-              onPress={() =>navigation.goBack()}
-            >
+            <TouchableOpacity onPress={() => navigation.goBack()}>
               <View style={{ backgroundColor: "transparent", margin: 20 }}>
                 <MaterialIcons name="arrow-back" size={32} color="#073021" />
               </View>
@@ -58,9 +55,9 @@ const SelectAnimalType = ({ navigation }) => {
               ANIMAL
             </Text>
 
-            <TouchableOpacity>
+            <TouchableOpacity onPress={() => navigation.goBack()}>
               <View style={{ backgroundColor: "transparent", margin: 20 }}>
-                <MaterialIcons name="menu" size={32} color="#073021" />
+                <MaterialIcons name="home" size={32} color="#073021" />
               </View>
             </TouchableOpacity>
           </View>

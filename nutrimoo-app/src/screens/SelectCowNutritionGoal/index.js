@@ -21,10 +21,6 @@ import { useState } from "react";
 const SelectCowNutritionGoal = ({navigation, route}) => {
   
   const { animalStage, from } = route.params;
-  
-  console.log(animalStage);
-  console.log(from);
-
 
   const openList = (animalGoal) => {
     navigation.navigate('List', {animalStage, animalGoal});
@@ -55,9 +51,9 @@ const SelectCowNutritionGoal = ({navigation, route}) => {
               META
             </Text>
 
-            <TouchableOpacity>
+            <TouchableOpacity onPress={() =>navigation.navigate("Home")}>
               <View style={{ backgroundColor: "transparent", margin: 20 }}>
-                <MaterialIcons name="menu" size={32} color="#073021" />
+                <MaterialIcons name="home" size={32} color="#073021" />
               </View>
             </TouchableOpacity>
           </View>

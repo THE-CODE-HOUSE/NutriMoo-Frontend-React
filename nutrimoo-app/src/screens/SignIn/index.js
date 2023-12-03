@@ -50,7 +50,6 @@ const SignInScreen = () => {
       await login(userData.token);
     } catch (error) {
       setErrorMessage("Erro ao fazer login. Por favor, tente novamente.");
-      console.log(error);
     } finally {
 
     }

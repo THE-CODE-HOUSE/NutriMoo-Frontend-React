@@ -9,10 +9,13 @@ async function fetchAndStoreDiets(stage, goal) {
       { headers: { requiresAuth: false } }
     );
     const diets = response;
-    console.log(diets.data)
     DietStorage.setDiets(diets.data);
-  } catch (e) {
-    throw new Error(e);
+  } catch (error) {
+    if (error.response && error.response.status === 404) {
+      throw new Error("Resultado não encontrado.");
+    } else {
+      console.error("Erro criar dieta", error);
+    }
   }
 }
 

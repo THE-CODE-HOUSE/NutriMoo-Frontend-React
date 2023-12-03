@@ -34,8 +34,7 @@ const styles = StyleSheet.create({
   },
   homeBar: {
     //backgroundColor: "white",
-    flexDirection: "row",
-    justifyContent: "space-between",
+    marginTop: 20,
     alignItems: "center",
     width: "100%",
     height: "10%",

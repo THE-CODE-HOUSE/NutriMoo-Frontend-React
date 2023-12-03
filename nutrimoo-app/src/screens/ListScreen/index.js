@@ -22,8 +22,6 @@ import { fetchAndStoreAnimals } from "../../services/animalService";
 const ListScreen = ({navigation,route}) => {
   const [data, setData] = useState([]);
   const {animalStage, animalGoal} = route.params;
-  console.log(animalStage);
-  console.log(animalGoal);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -42,7 +40,6 @@ const ListScreen = ({navigation,route}) => {
   });
 
   const openInfo = (animalData) => {
-    console.log(animalData);
     navigation.navigate('AnimalInfo',{animalData});
   };
 
@@ -102,6 +99,12 @@ const ListScreen = ({navigation,route}) => {
             >
               LISTA DE ANIMAIS
             </Text>
+
+            <TouchableOpacity onPress={() => navigation.navigate("Home")}>
+              <View style={{ backgroundColor: "transparent", marginLeft: 20 }}>
+              <MaterialIcons name="home" size={32} color="#073021" />
+              </View>
+            </TouchableOpacity>
           </View>
 
           <View style={styles.retangulo}>

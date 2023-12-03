@@ -26,15 +26,12 @@ import Toast from "react-native-root-toast";
 const DietScreen = ({ navigation, route }) => {
   const [data, setData] = useState([]);
   const { animalStage, animalGoal } = route.params;
-  console.log(animalStage);
-  console.log(animalGoal);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         await fetchAndStoreDiets(animalStage, animalGoal);
         setData(await DietStorage.getDiets());
-        console.log(data.foods);
       } catch (error) {
         // Mostrar o toast com a mensagem de erro
         Toast.show(`Erro: ${error.message}`, {
@@ -57,15 +54,13 @@ const DietScreen = ({ navigation, route }) => {
 
   const renderItem = ({ item }) => {
 
-    console.log(item);
-
     return (
       <View style={styles.ContainerLinhaBranca}>
         <Text style={styles.TextoText}>{item.nome}</Text>
-        <Text style={styles.TextoText}>{item.carbohydrates}</Text>
-        <Text style={styles.TextoText}>{item.protein}</Text>
-        <Text style={styles.TextoText}>{item.fat}</Text>
-        <Text style={styles.TextoText}>{item.cms}</Text>
+        <Text style={styles.TextoText}>{item.carbohydrates*1000}g</Text>
+        <Text style={styles.TextoText}>{item.protein*1000}g</Text>
+        <Text style={styles.TextoText}>{item.fat*1000}g</Text>
+        <Text style={styles.TextoText}>{item.cms}Kg</Text>
       </View>
     );
   };
@@ -98,9 +93,9 @@ const DietScreen = ({ navigation, route }) => {
               DIETA E {"\n"}
               FORMULAÇÃO
             </Text>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={() =>navigation.navigate("Home")}>
               <View style={{ backgroundColor: "transparent", margin: 20 }}>
-                <MaterialIcons name="menu" size={32} color="#073021" />
+                <MaterialIcons name="home" size={32} color="#073021" />
               </View>
             </TouchableOpacity>
           </View>

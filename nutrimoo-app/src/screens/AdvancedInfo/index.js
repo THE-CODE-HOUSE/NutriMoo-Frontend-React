@@ -24,7 +24,6 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 const AdvancedInfo = ({ navigation, route }) => {
   const [progress, setProgress] = useState(0.5);
   const { animalData } = route.params;
-  console.log(animalData);
 
   const goBack = () => {
     navigation.goBack();
@@ -58,9 +57,6 @@ const AdvancedInfo = ({ navigation, route }) => {
     }
     return (feedConsumptionRate / maxRate) * 100;
   }
-  
-  const a = getFeedConsumptionRatePercentage(animalData.stage, animalData.status.feedConsumptionRate)/100;
-  console.log(a);
   
   return (
     <TouchableWithoutFeedback accessible={false}>

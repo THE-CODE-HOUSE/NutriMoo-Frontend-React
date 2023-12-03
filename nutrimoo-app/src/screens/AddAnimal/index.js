@@ -107,7 +107,6 @@ const AddAnimalScreen = ({navigation}) => {
         setErrorMessage("A tag já está em uso. Por favor, tente novamente.");
     }else{
       setErrorMessage("Erro ao Adicionar Animal. Por favor, tente novamente.");
-      console.log(error);
     }
     } finally {
     }

@@ -32,7 +32,6 @@ const StackRoutes = () => {
   useEffect(() => {
     const checkToken = async () => {
       const token = await UserStorage.getUser();
-      console.log(token)
       if (token) {
         try {
           const decodedToken = jwtDecode(token);
@@ -56,7 +55,6 @@ const StackRoutes = () => {
   }, []);
   
   const isNowAuthenticated = isAuthenticated || isInitialAuthenticated;
-  console.log(isInitialAuthenticated)
 
   return (
     <Navigator

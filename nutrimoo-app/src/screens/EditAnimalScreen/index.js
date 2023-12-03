@@ -27,10 +27,9 @@ const EditAnimalScreen = ({navigation,route}) => {
   const [mode, setMode] = useState("date");
   const [errorMessage, setErrorMessage] = useState("");
   const {animalData} = route.params;
-  console.log(animalData);
   
   const goBack = () => {
-    navigation.goBack();
+    navigation.navigate("Home");
   };
 
   const animalTypes = [
@@ -122,7 +121,6 @@ const EditAnimalScreen = ({navigation,route}) => {
       const animalTypeValue = getValueByKey(animalTypes, animalType);
       const animalGoalValue = getValueByKey(animalGoals, animalGoal);
       
-      //console.log(tag, animalTypeValue, fertile ,pregnant, weight, animalGoalValue);
       await updateAnimal(animalData.tag,animalTypeValue,fertile,pregnant,weight,animalGoalValue);
 
       Toast.show("Animal editado com sucesso.");

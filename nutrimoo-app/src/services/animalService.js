@@ -2,7 +2,6 @@ import api from "./api";
 import { AnimalStorage } from "../storage/storage";
 
 async function addAnimal(tag, stage, breed, gender, weight,birthDate){
-    console.log(tag,stage,breed,gender,weight,birthDate);
     try{
         const response = await api.post("/api/cattle/insert", {
             tag,
@@ -22,7 +21,6 @@ async function addAnimal(tag, stage, breed, gender, weight,birthDate){
 }
 
 async function updateAnimal(tag, stage, fertile, pregnant, weight, goal){
-    console.log(tag, stage, fertile, pregnant, weight, goal);
     try{
         const response = await api.put("/api/cattle/update",{
             tag,

@@ -35,11 +35,10 @@ async function submitLogin(email, password) {
 
 //Essa função envia para a api os dados necessarios para o registro de um novo usuario
 async function submitRegister(email, password, role, name, department) {
-    console.log(email, password, role, name, department)
   try {
     //Aqui a role é alterada para as caracteristicas da role da api
     const mappedRole = mapRoleToConstant(role);
-    //console.log(mappedRole)
+ 
     role = mappedRole
 
     

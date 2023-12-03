@@ -46,23 +46,11 @@ const HomeScreen = ({navigation}) => {
           style={styles.container}
         >
           <View style={styles.homeBar}>
-            <TouchableOpacity>
-              <View style={{ backgroundColor: "transparent", margin: 20 }}>
-                <MaterialIcons name="menu" size={32} color="#073021" />
-              </View>
-            </TouchableOpacity>
-
             <Text
               style={{ fontSize: 24, fontWeight: "bold", color: "#073021" }}
             >
               HOME
             </Text>
-
-            <TouchableOpacity>
-              <View style={{ backgroundColor: "transparent", margin: 20 }}>
-                <MaterialIcons name="person" size={32} color="#073021" />
-              </View>
-            </TouchableOpacity>
           </View>
 
           <View style={styles.retangulo}>

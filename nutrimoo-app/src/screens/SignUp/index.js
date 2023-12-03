@@ -100,7 +100,6 @@ const SignUpScreen = ({ navigation }) => {
       navigation.navigate("Home");
     } catch (error) {
       setErrorMessage("Erro ao fazer login. Por favor, tente novamente.");
-      console.log(error);
     } finally {
     }
   };
