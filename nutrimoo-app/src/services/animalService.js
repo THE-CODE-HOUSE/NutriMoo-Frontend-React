@@ -40,7 +40,6 @@ async function updateAnimal(tag, stage, fertile, pregnant, weight, goal){
 
 async function deleteAnimal(tag){
     try{
-        console.log(tag);
         const response = await api.delete("/api/cattle/delete",{
             data: {
                 tag: tag

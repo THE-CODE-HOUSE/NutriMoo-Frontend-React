@@ -27,11 +27,9 @@ const SelectCowNutritionGoal = ({navigation, route}) => {
 
 
   const openList = (animalGoal) => {
-    console.log(animalStage);
     navigation.navigate('List', {animalStage, animalGoal});
   }
   const openDietList = (animalGoal) =>{
-    console.log("CORINTHIANS");
     navigation.navigate('DietScreen', {animalStage, animalGoal});
   }
 

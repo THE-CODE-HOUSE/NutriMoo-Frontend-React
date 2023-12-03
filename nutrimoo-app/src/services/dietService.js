@@ -12,7 +12,7 @@ async function fetchAndStoreDiets(stage, goal) {
     console.log(diets.data)
     DietStorage.setDiets(diets.data);
   } catch (e) {
-    console.error("Erro ao buscar e armazenar animais", e);
+    throw new Error(e);
   }
 }
 

@@ -78,13 +78,12 @@ const styles = StyleSheet.create({
 
    },
   ContainerLinhaBranca:{
-    height: 309,
-    width: 380,
-    justifyContent:'center',
-    alignSelf:'center',
-    backgroundColor: 'white',
-    borderRadius: 30,
-    elevation: 10
+    height: 70,
+    width: '100%',
+    flexDirection: 'row',
+    alignItems:'center',
+    justifyContent: 'space-around',
+
   },
   ContainerLinhaVerde:{
     height: 70,
@@ -108,11 +107,10 @@ const styles = StyleSheet.create({
   },
   TextoText:{
     fontWeight: 'bold',
+    alignSelf:'center',
     fontSize: 11,
     color:'#073021',
-    marginTop:70,
-    marginRight: -10,
-    position:'absolute',
+    marginEnd:"3%"
   }
 });
 

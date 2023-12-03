@@ -11,15 +11,17 @@ import {
   TouchableOpacity,
   ImageBackground,
   Button,
+  FlatList,
+  ToastAndroid,
 } from "react-native";
 
 import styles from "./styles";
 
 import { MaterialIcons } from "@expo/vector-icons";
-import { useState , useEffect } from "react";
+import { useState, useEffect } from "react";
 import { DietStorage } from "../../storage/storage";
 import { fetchAndStoreDiets } from "../../services/dietService";
-
+import Toast from "react-native-root-toast";
 
 const DietScreen = ({ navigation, route }) => {
   const [data, setData] = useState([]);
@@ -29,24 +31,44 @@ const DietScreen = ({ navigation, route }) => {
 
   useEffect(() => {
     const fetchData = async () => {
-      await fetchAndStoreDiets(animalStage, animalGoal);
-      console.log(await DietStorage.getDiets());
-
-      setData(await DietStorage.getDiets());
+      try {
+        await fetchAndStoreDiets(animalStage, animalGoal);
+        setData(await DietStorage.getDiets());
+        console.log(data.foods);
+      } catch (error) {
+        // Mostrar o toast com a mensagem de erro
+        Toast.show(`Erro: ${error.message}`, {
+          duration: Toast.durations.LONG,
+          position: Toast.positions.BOTTOM,
+          shadow: true,
+          animation: true,
+          hideOnPress: true,
+          delay: 0,
+          backgroundColor: '#000000', // Fundo preto
+          textColor: '#ffffff', // Texto branco
+          opacity: 1
+        });
+        navigation.goBack();
+      }
     };
-
+  
     fetchData();
   }, []);
 
-  const renderItem = ({ item }) => (
-    <View style={styles.row}>
-      <Text style={styles.TextoText}>RAÇÃO</Text>
-      <Text style={styles.TextoText}>100g</Text>
-      <Text style={styles.TextoText}>20g</Text>
-      <Text style={styles.TextoText}>400g</Text>
-      <Text style={styles.TextoText}>1000g</Text>
-    </View>
-  );
+  const renderItem = ({ item }) => {
+
+    console.log(item);
+
+    return (
+      <View style={styles.ContainerLinhaBranca}>
+        <Text style={styles.TextoText}>{item.nome}</Text>
+        <Text style={styles.TextoText}>{item.carbohydrates}</Text>
+        <Text style={styles.TextoText}>{item.protein}</Text>
+        <Text style={styles.TextoText}>{item.fat}</Text>
+        <Text style={styles.TextoText}>{item.cms}</Text>
+      </View>
+    );
+  };
 
   return (
     <TouchableWithoutFeedback accessible={false}>
@@ -112,6 +134,12 @@ const DietScreen = ({ navigation, route }) => {
               <Text style={styles.headerText}>GORDURA</Text>
               <Text style={styles.headerText}>QTD.</Text>
             </View>
+            
+            <FlatList
+              data={data.foods}
+              renderItem={renderItem}
+              keyExtractor={(item, index) => index.toString()}
+            />
           </View>
         </ImageBackground>
       </SafeAreaView>

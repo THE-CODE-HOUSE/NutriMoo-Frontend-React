@@ -28,7 +28,6 @@ const ListScreen = ({navigation,route}) => {
   useEffect(() => {
     const fetchData = async () => {
       await fetchAndStoreAnimals();
-      console.log(await AnimalStorage.getAnimals());
 
       setData(await AnimalStorage.getAnimals());
     };
@@ -36,18 +35,11 @@ const ListScreen = ({navigation,route}) => {
     fetchData();
   }, []);
 
-  useEffect(() => {
-    const loadData = async () => {
-      console.log("sadadsad");
-      const storedData = await AnimalStorage.getAnimals();
-      console.log("sss" + storedData);
-      if (storedData !== null) {
-        setData(storedData);
-      }
-    };
-
-    loadData();
-  }, []);
+  const filteredData = data.filter(item => {
+    const stageMatch = item.stage === animalStage;
+    const goalMatch = item.goal === animalGoal;
+    return stageMatch && goalMatch;
+  });
 
   const openInfo = (animalData) => {
     console.log(animalData);
@@ -70,7 +62,6 @@ const ListScreen = ({navigation,route}) => {
         cor1 = "#f5b7b1";
     }
 
-    if (((item.goal === animalGoal) && (item.stage === animalStage)) || animalStage === "ALL") {
       return (
         <TouchableOpacity
           style={[styles.customButton, { backgroundColor: cor1 }]}
@@ -83,10 +74,6 @@ const ListScreen = ({navigation,route}) => {
           </View>
         </TouchableOpacity>
       );
-    } else {
-      // Se o item não tem o goal desejado, retorna null para não renderizar nada
-      return null;
-    }
   };
 
   return (
@@ -126,7 +113,7 @@ const ListScreen = ({navigation,route}) => {
             >
               <FlatList
                 style={styles.listAnimals}
-                data={data}
+                data={animalStage === "ALL" ? data: filteredData}
                 renderItem={renderItem}
                 keyExtractor={(item) => item.tag.toString()}
               />
@@ -136,72 +123,6 @@ const ListScreen = ({navigation,route}) => {
       </SafeAreaView>
     </TouchableWithoutFeedback>
   );
-};
-
-const cowData = async () => {
-  return [
-    {
-      id: 1,
-      tag: "0001",
-      breed: "Holandes",
-      stage: "Novilha",
-      goal: "manter peso",
-      cor1: "#afe3eb",
-      cor2: "#c3f1f8",
-    },
-    {
-      id: 2,
-      tag: "0001",
-      breed: "Gemana",
-      stage: "Boi",
-      goal: "Manter Peso",
-      cor1: "#afe3eb",
-      cor2: "#c3f1f8",
-    },
-    {
-      id: 3,
-      tag: "0001",
-      breed: "Brasileira",
-      goal: "Manter Peso",
-      stage: "VACA",
-      cor1: "#afe3eb",
-      cor2: "#c3f1f8",
-    },
-    {
-      id: 4,
-      tag: "0001",
-      breed: "Brasileira",
-      stage: "Vaca em Lactação",
-      goal: "Ganhar Peso",
-      cor1: '#ebb9bb',
-      cor2: '#f9c6c7',
-    },
-    {
-      id: 5,
-      tag: "0001",
-      breed: "Brasileira",
-      stage: "Vaca",
-      cor1: '#ebb9bb',
-      cor2: '#f9c6c7',
-    },
-    {
-      id: 6,
-      tag: "0001",
-      breed: "Brasileira",
-      stage: "Vaca",
-      cor1: "#afe3eb",
-      cor2: "#c3f1f8",
-    },
-    {
-      id: 7,
-      tag: "0001",
-      breed: "Brasileira",
-      stage: "Vaca",
-      cor1: '#cbd171',
-      cor2: '#f4fc79',
-    },
-    // mais itens...
-  ];
 };
 
 export default ListScreen;

@@ -19,19 +19,15 @@ import { Alert } from "react-native";
 import Toast from "react-native-root-toast";
 import { deleteAnimal } from "../../services/animalService";
 
-const AnimalInfo = ({ navigation,route }) => {
-
-  const {animalData} = route.params;
-  console.log(animalData.weight);
+const AnimalInfo = ({ navigation, route }) => {
+  const { animalData } = route.params;
 
   const openEditAnimal = () => {
-    //navigation.navigate('EditAnimalScreen');
-    console.log("Tela de editar aberta!");
-    navigation.navigate('EditAnimalScreen',{animalData});
+    navigation.navigate("EditAnimalScreen", { animalData });
   };
 
   const openAdvancedInfo = () => {
-    navigation.navigate('AdvancedInfo',{animalData});
+    navigation.navigate("AdvancedInfo", { animalData });
   };
 
   const goBack = () => {
@@ -61,7 +57,7 @@ const AnimalInfo = ({ navigation,route }) => {
               Toast.show("Falha ao remover animal.");
               console.error(error);
             }
-          }
+          },
         },
       ],
       { cancelable: false }
@@ -70,8 +66,8 @@ const AnimalInfo = ({ navigation,route }) => {
 
   function formatDate(dateString) {
     const date = new Date(dateString);
-    const day = date.getDate().toString().padStart(2, '0');
-    const month = (date.getMonth() + 1).toString().padStart(2, '0');
+    const day = date.getDate().toString().padStart(2, "0");
+    const month = (date.getMonth() + 1).toString().padStart(2, "0");
     const year = date.getFullYear();
     return `${day}/${month}/${year}`;
   }
@@ -84,16 +80,10 @@ const AnimalInfo = ({ navigation,route }) => {
     }
   };
 
-
-
-  
-
-
-
   return (
     <TouchableWithoutFeedback accessible={false}>
       <SafeAreaView style={styles.container}>
-        <StatusBar hidden={true}/>
+        <StatusBar hidden={true} />
 
         <ImageBackground
           source={require("../../../assets/images/background.png")}
@@ -114,7 +104,9 @@ const AnimalInfo = ({ navigation,route }) => {
             />
           </View>
 
-          <Text style={{ fontSize: 40, fontWeight: "bold" }}>{animalData.tag}</Text>
+          <Text style={{ fontSize: 40, fontWeight: "bold" }}>
+            {animalData.tag}
+          </Text>
           <Text style={{ fontSize: 16 }}>{animalData.breed}</Text>
 
           <Image
@@ -157,12 +149,10 @@ const AnimalInfo = ({ navigation,route }) => {
                 </TouchableOpacity>
               </View>
 
-              <View style={{ marginTop: "2.5%" }}>
+              <View style={styles.infoContainer}>
                 <View style={styles.titletext}>
                   <Text style={styles.titletext}>Estágio:</Text>
-                  <Text style={styles.textobotao}>
-                    {animalData.stage}
-                  </Text>
+                  <Text style={styles.textobotao}>{animalData.stage}</Text>
                 </View>
 
                 <View>
@@ -173,54 +163,26 @@ const AnimalInfo = ({ navigation,route }) => {
                 </View>
 
                 <View>
-                  <Text style={styles.titletext}>
-                    Peso:
-                  </Text>
+                  <Text style={styles.titletext}>Peso:</Text>
                   <Text style={styles.textobotao}>{animalData.weight} kg</Text>
                 </View>
 
-                <View style={{ flexDirection: "row" }}>
-                  <Text style={styles.titletext}>Status:</Text>
-                  
-                  <TouchableOpacity
-                    style={{
-                      backgroundColor: "grey",
-                      width: "35%",
-                      height: "40%",
-                      elevation: 10,
-                      borderRadius: 25,
-                      alignSelf: "center",
-                      marginLeft: "5%",
-                      marginTop: "-1%",
-                      justifyContent: "center",
-                    }}
-                  >
-                    <Text style={{ textAlign: "center", color: "#EAE3BD" }}>
-                      Lactação Vazia
-                    </Text>
-                  </TouchableOpacity>
+                <Text style={styles.titletext}>Status:</Text>
 
-                  <TouchableOpacity
-                    style={{
-                      backgroundColor: "#FF897D",
-                      width: "20%",
-                      height: "40%",
-                      elevation: 10,
-                      borderRadius: 25,
-                      alignSelf: "center",
-                      marginLeft: "5%",
-                      marginTop: "-1%",
-                      justifyContent: "center",
-                    }}
-                  >
-                    <Text style={{ textAlign: "center", color: "white" }}>
-                      Prenhe
-                    </Text>
-                  </TouchableOpacity>
+                <View style={{ flexDirection: "row" }}>
+                  <Text style={styles.textobotao}>
+                    {getStatusText(animalData)}
+                  </Text>
                 </View>
               </View>
 
-              <View style={{ flexDirection: "row", height: "100%" }}>
+              <View
+                style={{
+                  flexDirection: "row",
+                  height: "100%",
+                  marginTop: "10%",
+                }}
+              >
                 <TouchableOpacity
                   style={{
                     backgroundColor: "#BA1A1A",
