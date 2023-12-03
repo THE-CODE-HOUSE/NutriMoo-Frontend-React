@@ -1,6 +1,5 @@
 import api from "./api";
 import { AnimalStorage } from "../storage/storage";
-import { ToastAndroid } from "react-native";
 
 async function addAnimal(tag, stage, breed, gender, weight,birthDate){
     console.log(tag,stage,breed,gender,weight,birthDate);
@@ -39,6 +38,22 @@ async function updateAnimal(tag, stage, fertile, pregnant, weight, goal){
     }
 }
 
+async function deleteAnimal(tag){
+    try{
+        console.log(tag);
+        const response = await api.delete("/api/cattle/delete",{
+            data: {
+                tag: tag
+            },
+            headers: {
+                requiresAuth: true
+            }
+        });
+    } catch (e) {
+        console.error("Erro ao Adicionar Animal", e);
+    }
+}
+
 async function fetchAndStoreAnimals() {
     try {
         const response = await api.get("/api/cattle/all");
@@ -50,5 +65,5 @@ async function fetchAndStoreAnimals() {
 }
 
 
-export { addAnimal, updateAnimal, fetchAndStoreAnimals };
+export { addAnimal, updateAnimal, fetchAndStoreAnimals, deleteAnimal };
 

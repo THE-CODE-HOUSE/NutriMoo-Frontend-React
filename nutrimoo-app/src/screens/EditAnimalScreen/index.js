@@ -20,44 +20,28 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { useState, useEffect } from "react";
 import { SelectList } from "react-native-dropdown-select-list";
 import { updateAnimal } from "../../services/animalService";
+import Toast from "react-native-root-toast";
 
 const EditAnimalScreen = ({navigation,route}) => {
-  const [date, setDate] = useState(new Date());
   const [show, setShow] = useState(false);
   const [mode, setMode] = useState("date");
   const [errorMessage, setErrorMessage] = useState("");
   const {animalData} = route.params;
   console.log(animalData);
   
-  const vacaTeste = {
-      "tag": "076000000000018",
-      "breed": "Jersey",
-      "stage": "Vaca em lactação",
-      "gender": "Fêmea",
-      "weight": 700,
-      "goal": "Ganhar Peso",
-      "status": {
-        "heartRate": 53.55,
-        "temperature": 38.49,
-        "activityLevel": "Ativo",
-        "feedConsumptionRate": 6.32
-      },
-      "pregnant": false,
-      "fertile": true,
-      "birthDate": {
-        "$date": "2019-12-18T00:33:56.979Z"
-      }
+  const goBack = () => {
+    navigation.goBack();
   };
 
   const animalTypes = [
-    { key: "VL", value: "Vaca em lactação" },
+    { key: "VL", value: "Vaca em Lactação" },
     { key: "BN", value: "Bezerra/Novilha" },
     { key: "VA", value: "Vaca" },
     { key: "BO", value: "Boi" },
     { key: "TO", value: "Touro" },
   ];
   const animalTypesFemale = [
-    { key: "VL", value: "Vaca em lactação" },
+    { key: "VL", value: "Vaca em Lactação" },
     { key: "BN", value: "Bezerra/Novilha" },
     { key: "VA", value: "Vaca" }
   ];
@@ -74,19 +58,19 @@ const EditAnimalScreen = ({navigation,route}) => {
   const optionsByGender = {
     TO: [
       { key: "FE", value: "Fértil" },
-      { key: "NF", value: "Não fértil" },
+      { key: "NF", value: "Não Fértil" },
     ],
     VA: [
       { key: "FE", value: "Fértil" },
-      { key: "NF", value: "Não fértil" },
+      { key: "NF", value: "Não Fértil" },
       { key: "PR", value: "Prenha" },
-      { key: "NP", value: "Não prenha" },
+      { key: "NP", value: "Não Prenha" },
     ],
     BO: [{ key: "IN", value: "Infértil" }],
-    BN: [{ key: "NF", value: "Não fértil"}],
+    BN: [{ key: "NF", value: "Não Fértil"}],
     VL: [
       { key: "FE", value: "Fértil" },
-      { key: "NF", value: "Não fértil" },
+      { key: "NF", value: "Não Fértil" },
     ],
   };
   const determineInitialStatusKey = (animal) => {
@@ -97,16 +81,15 @@ const EditAnimalScreen = ({navigation,route}) => {
     }
   };
   
-  const initialAnimalStatusKey = determineInitialStatusKey(vacaTeste);
-  const initialAnimalTypeKey = getKeyByValue(animalTypes, vacaTeste.stage);
-  const initialAnimalGoalKey = getKeyByValue(animalGoals, vacaTeste.goal);
+  const initialAnimalStatusKey = determineInitialStatusKey(animalData);
+  const initialAnimalTypeKey = getKeyByValue(animalTypes, animalData.stage);
+  const initialAnimalGoalKey = getKeyByValue(animalGoals, animalData.goal);
 
-  const genderBasedAnimalTypes = vacaTeste.gender === "Fêmea" ? animalTypesFemale : animalTypesMale;
+  const genderBasedAnimalTypes = animalData.gender === "Fêmea" ? animalTypesFemale : animalTypesMale;
   const [animalType, setAnimalType] = useState(initialAnimalTypeKey);
   const [animalStatus, setAnimalStatus] = useState(initialAnimalStatusKey);
   const [animalGoal, setAnimalGoal] = useState(initialAnimalGoalKey);
-  var [weight, setWeight] = useState(vacaTeste.weight);
-  const tag = vacaTeste.tag;
+  var [weight, setWeight] = useState(animalData.weight);
   
   function getKeyByValue(array, value) {
     const item = array.find(item => item.value === value);
@@ -140,9 +123,15 @@ const EditAnimalScreen = ({navigation,route}) => {
       const animalGoalValue = getValueByKey(animalGoals, animalGoal);
       
       //console.log(tag, animalTypeValue, fertile ,pregnant, weight, animalGoalValue);
-      await updateAnimal(tag,animalTypeValue,fertile,pregnant,weight,animalGoalValue);
-    } catch (error) {
+      await updateAnimal(animalData.tag,animalTypeValue,fertile,pregnant,weight,animalGoalValue);
 
+      Toast.show("Animal editado com sucesso.");
+      setTimeout(() => {
+        goBack();
+      }, 1500);
+
+    } catch (error) {
+      Toast.show("Animal Não foi Editado",error);
     }
   };
   
@@ -213,7 +202,7 @@ const EditAnimalScreen = ({navigation,route}) => {
                 />
               }
               <TextInput
-                placeholder={tag}
+                placeholder={animalData.tag}
                 autoCorrect={false}
                 keyboardType="default"
                 style={styles.textinputWithIcon}
@@ -272,11 +261,10 @@ const EditAnimalScreen = ({navigation,route}) => {
                   value={weight.toString()}
                   autoCorrect={false}
                   keyboardType="numeric"
-                  onChangeText={(text) => setWeight(parseFloat(text))}
+                  onChangeText={(text) => setWeight(text === '' ? 0 : parseFloat(text))}
                   style={styles.textinputWithIcon}
                   maxLength={40}
                 />
-
             </View>
 
             <Text style={styles.contText}>META</Text>
