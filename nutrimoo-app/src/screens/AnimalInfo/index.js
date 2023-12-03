@@ -17,31 +17,12 @@ import { MaterialCommunityIcons, MaterialIcons } from "@expo/vector-icons";
 import { useState } from "react";
 import { Alert } from "react-native";
 import Toast from "react-native-root-toast";
-
-const showConfirmationDialog = () => {
-  Alert.alert(
-    "Remover animal",
-    "Essa ação não poderá ser desfeita",
-    [
-      {
-        text: "Cancelar",
-        onPress: () => Toast.show("Animal não foi removido."),
-        style: "cancel",
-      },
-      {
-        text: "Remover",
-        onPress: () => Toast.show("Animal removido com sucesso!"),
-      },
-    ],
-    { cancelable: false }
-  );
-};
-
+import { deleteAnimal } from "../../services/animalService";
 
 const AnimalInfo = ({ navigation,route }) => {
 
   const {animalData} = route.params;
-  console.log(animalData.status);
+  console.log(animalData.weight);
 
   const openEditAnimal = () => {
     //navigation.navigate('EditAnimalScreen');
@@ -50,13 +31,63 @@ const AnimalInfo = ({ navigation,route }) => {
   };
 
   const openAdvancedInfo = () => {
-    const animalStatus = animalData.status;
-    navigation.navigate('AdvancedInfo',{animalStatus});
+    navigation.navigate('AdvancedInfo',{animalData});
   };
 
   const goBack = () => {
     navigation.goBack();
   };
+
+  const showConfirmationDialog = () => {
+    Alert.alert(
+      "Remover animal",
+      "Essa ação não poderá ser desfeita",
+      [
+        {
+          text: "Cancelar",
+          onPress: () => Toast.show("Animal não foi removido."),
+          style: "cancel",
+        },
+        {
+          text: "Remover",
+          onPress: async () => {
+            try {
+              await deleteAnimal(animalData.tag);
+              Toast.show("Animal removido com sucesso.");
+              setTimeout(() => {
+                goBack();
+              }, 1500); // Ajuste o tempo conforme necessário
+            } catch (error) {
+              Toast.show("Falha ao remover animal.");
+              console.error(error);
+            }
+          }
+        },
+      ],
+      { cancelable: false }
+    );
+  };
+
+  function formatDate(dateString) {
+    const date = new Date(dateString);
+    const day = date.getDate().toString().padStart(2, '0');
+    const month = (date.getMonth() + 1).toString().padStart(2, '0');
+    const year = date.getFullYear();
+    return `${day}/${month}/${year}`;
+  }
+
+  const getStatusText = (animal) => {
+    if (animal.fertile) {
+      return animal.pregnant ? "Prenha e Fértil" : "Fértil";
+    } else {
+      return "Não Fértil";
+    }
+  };
+
+
+
+  
+
 
 
   return (
@@ -83,8 +114,8 @@ const AnimalInfo = ({ navigation,route }) => {
             />
           </View>
 
-          <Text style={{ fontSize: 40, fontWeight: "bold" }}>Mimosa</Text>
-          <Text style={{ fontSize: 16 }}>Holandesa</Text>
+          <Text style={{ fontSize: 40, fontWeight: "bold" }}>{animalData.tag}</Text>
+          <Text style={{ fontSize: 16 }}>{animalData.breed}</Text>
 
           <Image
             style={{}}
@@ -127,42 +158,30 @@ const AnimalInfo = ({ navigation,route }) => {
               </View>
 
               <View style={{ marginTop: "2.5%" }}>
-                <View style={{ flexDirection: "row" }}>
+                <View style={styles.titletext}>
                   <Text style={styles.titletext}>Estágio:</Text>
-                  <TouchableOpacity
-                    style={{
-                      backgroundColor: "white",
-                      width: "30%",
-                      height: "40%",
-                      elevation: 10,
-                      borderRadius: 25,
-                      alignSelf: "center",
-                      marginLeft: "5%",
-                      marginTop: "-1%",
-                      justifyContent: "center",
-                    }}
-                  >
-                    <Text style={{ textAlign: "center", color: "#969270" }}>
-                      Leiteira
-                    </Text>
-                  </TouchableOpacity>
+                  <Text style={styles.textobotao}>
+                    {animalData.stage}
+                  </Text>
                 </View>
 
                 <View>
                   <Text style={styles.titletext}>Data de Nascimento:</Text>
-                  <Text style={styles.textobotao}>13/11/2023</Text>
+                  <Text style={styles.textobotao}>
+                    {formatDate(animalData.birthDate)}
+                  </Text>
                 </View>
 
                 <View>
                   <Text style={styles.titletext}>
-                    Data prevista(Abate/Ordenho):
+                    Peso:
                   </Text>
-                  <Text style={styles.textobotao}>13/11/2023</Text>
+                  <Text style={styles.textobotao}>{animalData.weight} kg</Text>
                 </View>
 
                 <View style={{ flexDirection: "row" }}>
                   <Text style={styles.titletext}>Status:</Text>
-
+                  
                   <TouchableOpacity
                     style={{
                       backgroundColor: "grey",

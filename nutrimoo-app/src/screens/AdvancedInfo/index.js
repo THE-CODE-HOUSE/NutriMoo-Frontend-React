@@ -23,13 +23,45 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 const AdvancedInfo = ({ navigation, route }) => {
   const [progress, setProgress] = useState(0.5);
-  const { animalStatus } = route.params;
-  console.log(animalStatus);
+  const { animalData } = route.params;
+  console.log(animalData);
 
   const goBack = () => {
     navigation.goBack();
   };
 
+  function getActivityLevelPercentage(activityLevel) {
+    const levels = {
+      "Ativo": 100,
+      "Moderadamente Ativo": 75,
+      "Moderado": 50,
+      "Inativo": 25,
+      "Sedentário": 0
+    };
+  
+    return levels[activityLevel] || 0; // Retorna 0 se o nível de atividade não estiver definido
+  }
+  
+  const FEED_CONSUMPTION_RATES = {
+    "Vaca em Lactação": 20, // exemplo: vacas em lactação podem comer até 20 kg por dia
+    "Vaca": 15, // exemplo: vacas podem comer até 15 kg por dia
+    "Bezerra/Novilha": 10, // exemplo: bezerras/novilhas podem comer até 10 kg por dia
+    "Boi": 18, // exemplo: bois podem comer até 18 kg por dia
+    "Touro": 22, // exemplo: touros podem comer até 22 kg por dia
+  };
+  
+  function getFeedConsumptionRatePercentage(stage, feedConsumptionRate) {
+    const maxRate = FEED_CONSUMPTION_RATES[stage];
+    if (!maxRate) {
+      console.error("Estágio não definido: " + stage);
+      return 0;
+    }
+    return (feedConsumptionRate / maxRate) * 100;
+  }
+  
+  const a = getFeedConsumptionRatePercentage(animalData.stage, animalData.status.feedConsumptionRate)/100;
+  console.log(a);
+  
   return (
     <TouchableWithoutFeedback accessible={false}>
       <SafeAreaView style={styles.container}>
@@ -74,10 +106,8 @@ const AdvancedInfo = ({ navigation, route }) => {
                 { backgroundColor: "#FBF6E9", height: "65%" },
               ]}
             >
-              <Text style={{ fontSize: 40, fontWeight: "bold" }}>121</Text>
-              <Text style={{ fontSize: 16, fontWeight: "bold" }}>
-                Holandesa
-              </Text>
+              <Text style={{ fontSize: 40, fontWeight: "bold" }}>{animalData.tag}</Text>
+              <Text style={{ fontSize: 16, fontWeight: "bold" }}>{animalData.breed}</Text>
 
               <View
                 style={{
@@ -109,7 +139,7 @@ const AdvancedInfo = ({ navigation, route }) => {
                   <Text
                     style={{ fontSize: 16, textAlign: "center", marginLeft: 5 }}
                   >
-                    20
+                    {animalData.status.heartRate}
                   </Text>
                 </View>
 
@@ -119,7 +149,7 @@ const AdvancedInfo = ({ navigation, route }) => {
                     height: "20%",
                     borderRadius: 20,
                   }}
-                  progress={0.25} // Ajuste o valor de progresso conforme necessário
+                  progress={animalData.status.heartRate/100} // Ajuste o valor de progresso conforme necessário
                   color="red"
                 />
 
@@ -141,7 +171,7 @@ const AdvancedInfo = ({ navigation, route }) => {
                   <Text
                     style={{ fontSize: 16, textAlign: "center", marginLeft: 5 }}
                   >
-                    40°C
+                    {animalData.status.temperature}
                   </Text>
                 </View>
 
@@ -151,7 +181,7 @@ const AdvancedInfo = ({ navigation, route }) => {
                     height: "20%",
                     borderRadius: 20,
                   }}
-                  progress={0.4} // Ajuste o valor de progresso conforme necessário
+                  progress={animalData.status.temperature/100} // Ajuste o valor de progresso conforme necessário
                   color="#C6FBD1"
                 />
 
@@ -169,7 +199,7 @@ const AdvancedInfo = ({ navigation, route }) => {
                   <Text
                     style={{ fontSize: 16, textAlign: "center", marginLeft: 5 }}
                   >
-                    75
+                    {animalData.status.activityLevel}
                   </Text>
                 </View>
 
@@ -179,7 +209,7 @@ const AdvancedInfo = ({ navigation, route }) => {
                     height: "20%",
                     borderRadius: 20,
                   }}
-                  progress={0.75} // Ajuste o valor de progresso conforme necessário
+                  progress={getActivityLevelPercentage(animalData.status.activityLevel)/100} // Ajuste o valor de progresso conforme necessário
                   color="#9CFD9D"
                 />
 
@@ -201,7 +231,7 @@ const AdvancedInfo = ({ navigation, route }) => {
                   <Text
                     style={{ fontSize: 16, textAlign: "center", marginLeft: 5 }}
                   >
-                    100
+                    {animalData.status.feedConsumptionRate}
                   </Text>
                 </View>
 
@@ -211,7 +241,7 @@ const AdvancedInfo = ({ navigation, route }) => {
                     height: "20%",
                     borderRadius: 20,
                   }}
-                  progress={1} // Ajuste o valor de progresso conforme necessário
+                  progress={getFeedConsumptionRatePercentage(animalData.stage, animalData.status.feedConsumptionRate)/100} // Ajuste o valor de progresso conforme necessário
                   color="#345A48"
                 />
               </View>

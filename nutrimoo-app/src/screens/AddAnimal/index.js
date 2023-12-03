@@ -37,7 +37,7 @@ const AddAnimalScreen = () => {
   
 
   const animalTypes = [
-    { key: "VL", value: "Vaca em lactação" },
+    { key: "VL", value: "Vaca em Lactação" },
     { key: "BN", value: "Bezerra/Novilha" },
     { key: "VA", value: "Vaca" },
     { key: "BO", value: "Boi" },

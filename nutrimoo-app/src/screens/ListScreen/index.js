@@ -59,15 +59,15 @@ const ListScreen = ({navigation,route}) => {
     let cor1, cor2;
 
     // Definindo as cores baseadas no gênero
-    if (item.gender === "Macho") {
+    if (item.stage ==="Bezerra/Novilha") {
+        cor2 = "#fcee6f";
+        cor1 = "#f5df1b";
+    } else if(item.gender === "Macho") {
         cor1 = "#afe3eb";
         cor2 = "#c3f1f8";
     } else if (item.gender === "Fêmea") {
         cor2 = "#f8d7da";
         cor1 = "#f5b7b1";
-    } else { // Indefinido ou outro valor
-        cor2 = "#f0f0f0";
-        cor1 = "#d6d6d6";
     }
 
     if (((item.goal === animalGoal) && (item.stage === animalStage)) || animalStage === "ALL") {

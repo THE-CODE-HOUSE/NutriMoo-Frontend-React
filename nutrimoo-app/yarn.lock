@@ -5767,7 +5767,7 @@ react-native-root-siblings@^4.0.0:
 
 react-native-root-toast@^3.5.1:
   version "3.5.1"
-  resolved "https://registry.npmjs.org/react-native-root-toast/-/react-native-root-toast-3.5.1.tgz"
+  resolved "https://registry.yarnpkg.com/react-native-root-toast/-/react-native-root-toast-3.5.1.tgz#550520c77ee15c97ea6fb90151262ceb89cdcacc"
   integrity sha512-zqsuec7Ugx2/9hR9BHqcmb3WWC/WBouqn2RYIpeTG+OpVvVfvr2UhWK4kLPJLk5/icZWl3xJrqiktPpbRpEA2A==
   dependencies:
     deprecated-react-native-prop-types "^2.3.0"
