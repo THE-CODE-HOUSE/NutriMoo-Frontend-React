@@ -41,4 +41,20 @@ const AnimalStorage = {
     }
 };
 
-export {UserStorage, AnimalStorage};
+const DietStorage = {
+    setDiets: (diets) => {
+        AsyncStorage.setItem('diets', JSON.stringify(diets));
+    },
+    getDiets: async () => {
+        try {
+            const diets = await AsyncStorage.getItem('diets');
+            return diets ? JSON.parse(diets) : [];
+        } catch (e) {
+            // Tratar erro
+            console.error('Erro ao recuperar dietas', e);
+            return [];
+        }
+    }
+};
+
+export {UserStorage, AnimalStorage, DietStorage};

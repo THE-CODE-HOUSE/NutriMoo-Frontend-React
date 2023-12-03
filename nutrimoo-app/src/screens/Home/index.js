@@ -88,7 +88,7 @@ const HomeScreen = ({navigation}) => {
             <TouchableOpacity style={styles.button} onPress={openAddAnimalScreen}>
               <View style={styles.iconContainer}>
                 <Image
-                  source={require("../../../assets/images/cow.png")} // Substitua com o caminho correto da imagem
+                  source={require("../../../assets/images/add_cow.png")} // Substitua com o caminho correto da imagem
                   style={styles.image}
                 />
               </View>

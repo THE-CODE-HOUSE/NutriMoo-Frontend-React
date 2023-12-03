@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
     position: "absolute",
     bottom: 1,
     width: "100%",
-    height: "62%",
+    height: "50%",
     backgroundColor: "#fffff",
     alignItems: "center",
     borderTopLeftRadius: 40,
@@ -51,9 +51,6 @@ const styles = StyleSheet.create({
     marginTop: 60,
     margin:10
   },
-  icon: {
-    color: "#073021",
-  },
   textContainer: {
     borderRadius: 30,
     height:"100%",
@@ -78,6 +75,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#073021',
     borderTopRightRadius: 30,
     borderTopLeftRadius: 30,
+
    },
   ContainerLinhaBranca:{
     height: 309,

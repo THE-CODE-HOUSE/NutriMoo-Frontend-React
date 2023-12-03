@@ -19,6 +19,11 @@ import { MaterialIcons } from "@expo/vector-icons";
 import { useState } from "react";
 
 const SelectAnimalTypeDiet = ({navigation}) => {
+  const openSelectGoal = (animalStage) => {
+    const from = "Diet";
+    navigation.navigate("SelectCowNutritionGoal", { animalStage, from });
+  };
+
   return (
     <TouchableWithoutFeedback accessible={false}>
       <SafeAreaView style={styles.container}>
@@ -58,13 +63,13 @@ const SelectAnimalTypeDiet = ({navigation}) => {
             ></View>
 
             <View style={styles.teste}>
-              <TouchableOpacity style={styles.button}>
+              <TouchableOpacity style={styles.button} onPress={() => openSelectGoal("Vaca em Lactação")}>
                 <View style={styles.textContainer}>
                   <Text style={styles.text}>VACA EM LACTAÇÃO</Text>
                 </View>
               </TouchableOpacity>
 
-              <TouchableOpacity style={styles.button}>
+              <TouchableOpacity style={styles.button} onPress={() => openSelectGoal("Bezerra/Novilha")}>
                 <View style={styles.textContainer}>
                   <Text style={styles.text}>BEZERRA/ NOVILHA</Text>
                 </View>
@@ -72,13 +77,13 @@ const SelectAnimalTypeDiet = ({navigation}) => {
             </View>
 
             <View style={styles.teste}>
-              <TouchableOpacity style={styles.button}>
+              <TouchableOpacity style={styles.button} onPress={() => openSelectGoal("Vaca")}>
                 <View style={styles.textContainer}>
                   <Text style={styles.text}>VACA</Text>
                 </View>
               </TouchableOpacity>
 
-              <TouchableOpacity style={styles.button}>
+              <TouchableOpacity style={styles.button} onPress={() => openSelectGoal("Boi")}>
                 <View style={styles.textContainer}>
                   <Text style={styles.text}>BOI</Text>
                 </View>
@@ -86,7 +91,7 @@ const SelectAnimalTypeDiet = ({navigation}) => {
             </View>
 
             <View style={styles.teste}>
-              <TouchableOpacity style={styles.button}>
+              <TouchableOpacity style={styles.button} onPress={() => openSelectGoal("Touro")}>
                 <View style={styles.textContainer}>
                   <Text style={styles.text}>TOURO</Text>
                 </View>

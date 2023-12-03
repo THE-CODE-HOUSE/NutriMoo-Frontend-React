@@ -20,7 +20,8 @@ import { useState } from "react";
 
 const SelectAnimalType = ({ navigation }) => {
   const openSelectGoal = (animalStage) => {
-    navigation.navigate("SelectCowNutritionGoal", { animalStage });
+    const from = "Animal";
+    navigation.navigate("SelectCowNutritionGoal", { animalStage,from });
   };
   const openList = (animalStage) => {
     console.log(animalStage);

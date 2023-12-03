@@ -15,6 +15,7 @@ import AnimalInfo from '../screens/AnimalInfo';
 import AdvancedInfo from '../screens/AdvancedInfo';
 import EditAnimalScreen from '../screens/EditAnimalScreen';
 import AddAnimalScreen from '../screens/AddAnimal';
+import DietScreen from '../screens/Diet';
 
 import { UserStorage } from '../storage/storage';
 import "core-js/stable/atob";
@@ -77,6 +78,7 @@ const StackRoutes = () => {
       <Screen name="AdvancedInfo" component={AdvancedInfo} />
       <Screen name="EditAnimalScreen" component={EditAnimalScreen} />
       <Screen name="AddAnimalScreen" component={AddAnimalScreen} />
+      <Screen name="DietScreen" component={DietScreen} />
     </Navigator>
   );
 };

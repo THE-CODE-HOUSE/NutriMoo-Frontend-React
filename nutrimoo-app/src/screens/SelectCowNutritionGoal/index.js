@@ -20,14 +20,19 @@ import { useState } from "react";
 
 const SelectCowNutritionGoal = ({navigation, route}) => {
   
-  const { animalStage } = route.params;
+  const { animalStage, from } = route.params;
   
   console.log(animalStage);
+  console.log(from);
 
 
   const openList = (animalGoal) => {
     console.log(animalStage);
     navigation.navigate('List', {animalStage, animalGoal});
+  }
+  const openDietList = (animalGoal) =>{
+    console.log("CORINTHIANS");
+    navigation.navigate('DietScreen', {animalStage, animalGoal});
   }
 
   return (
@@ -68,19 +73,19 @@ const SelectCowNutritionGoal = ({navigation, route}) => {
             ></View>
 
             <View style={styles.buttonContainer}>
-              <TouchableOpacity style={styles.button} onPress={() => openList("Ganhar Peso")}>
+              <TouchableOpacity style={styles.button} onPress={() => from === "Animal" ? openList("Ganhar Peso") : openDietList("Ganhar Peso")}>
                 <View style={styles.textContainer}>
                   <Text style={styles.text}>GANHAR PESO</Text>
                 </View>
               </TouchableOpacity>
 
-              <TouchableOpacity style={styles.button} onPress={() => openList("Manter Peso")}>
+              <TouchableOpacity style={styles.button} onPress={() => from === "Animal" ? openList("Manter Peso") : openDietList("Manter Peso")}>
                 <View style={styles.textContainer}>
                   <Text style={styles.text}>MANTER PESO</Text>
                 </View>
               </TouchableOpacity>
 
-              <TouchableOpacity style={styles.button} onPress={() => openList("Perder Peso")}>
+              <TouchableOpacity style={styles.button} onPress={() => from === "Animal" ? openList("Perder Peso") : openDietList("Perder Peso")}>
                 <View style={styles.textContainer}>
                   <Text style={styles.text}>PERDER PESO</Text>
                 </View>
