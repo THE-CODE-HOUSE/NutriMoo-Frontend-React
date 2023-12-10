@@ -1,6 +1,7 @@
 import api from "./api";
 import { AnimalStorage } from "../storage/storage";
 
+//Recebe esses parametros e envia para a api que efetua a adição do animal
 async function addAnimal(tag, stage, breed, gender, weight,birthDate){
     try{
         const response = await api.post("/api/cattle/insert", {
@@ -20,6 +21,7 @@ async function addAnimal(tag, stage, breed, gender, weight,birthDate){
     }
 }
 
+//Recebe esses parametros e envia para a api que efetua a atualização do animal
 async function updateAnimal(tag, stage, fertile, pregnant, weight, goal){
     try{
         const response = await api.put("/api/cattle/update",{
@@ -36,6 +38,7 @@ async function updateAnimal(tag, stage, fertile, pregnant, weight, goal){
     }
 }
 
+//Recebe a tag do animal e o deleta
 async function deleteAnimal(tag){
     try{
         const response = await api.delete("/api/cattle/delete",{
@@ -50,7 +53,7 @@ async function deleteAnimal(tag){
         console.error("Erro ao Adicionar Animal", e);
     }
 }
-
+//Puxa todos os animais do banco e os coloca no storage
 async function fetchAndStoreAnimals() {
     try {
         const response = await api.get("/api/cattle/all");

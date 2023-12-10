@@ -98,6 +98,7 @@ const AddAnimalScreen = ({navigation}) => {
         gender = "Macho";
       }
     
+      //Função do que vem do service de animal
       await addAnimal(tag, animalTypeValue, animalBreedValue, gender, weight, date);
       navigation.goBack();
       ToastAndroid.show("Animal Adicionado com Sucesso!", ToastAndroid.SHORT);

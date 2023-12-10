@@ -25,18 +25,24 @@ import { useAuth } from '../context/authContext';
 
 const StackRoutes = () => {
 
+  //Abaixo temos o estado de autenticação que vem do nosso contexto (Ler o arquivo authContext.js)
   const { isAuthenticated } = useAuth();
+  //E o estado que checa se o usauario esta inicialmente autenticado
   const [isInitialAuthenticated, setIsInitialAuthenticated] = useState(false);
   
-
+//Esse useEffect é utilizado para checar a validade do token
   useEffect(() => {
     const checkToken = async () => {
+      //Token puxado do storage
       const token = await UserStorage.getUser();
       if (token) {
         try {
+          //Utilizamos o jwtDecode para decodificar o token
           const decodedToken = jwtDecode(token);
+          //Checamos se a data de expiração do token, em milésimos, é < que a data atual
           const isTokenExpired = decodedToken.exp * 1000 < Date.now();
 
+          //Se não tiver expirado o usuario é autenticado
           if (!isTokenExpired) {
             setIsInitialAuthenticated(true);
           } else {
@@ -54,6 +60,7 @@ const StackRoutes = () => {
     checkToken();
   }, []);
   
+  //Isso é utilizado para uma solução que tive para que sempre que abrir o app seja checado se o usuario está autenticado
   const isNowAuthenticated = isAuthenticated || isInitialAuthenticated;
 
   return (
@@ -62,6 +69,7 @@ const StackRoutes = () => {
         headerShown: false, // Isso remove o cabeçalho em todas as telas
       }}
     >
+      {/*Caso estaja autenticado já abre diretamente a tela de Home senão vai para a tela de login*/}
       {isNowAuthenticated ? (
           <Screen name="Home" component={HomeScreen} />
         ) : (

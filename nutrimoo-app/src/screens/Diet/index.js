@@ -25,11 +25,14 @@ import Toast from "react-native-root-toast";
 
 const DietScreen = ({ navigation, route }) => {
   const [data, setData] = useState([]);
+  //Recebe as informações das outras paginas para utilizar como filtro
   const { animalStage, animalGoal } = route.params;
 
+  //Abaixo temos a logica para pegar os dados da api e guardar no storage
   useEffect(() => {
     const fetchData = async () => {
       try {
+        //Essa função vem do service de animais
         await fetchAndStoreDiets(animalStage, animalGoal);
         setData(await DietStorage.getDiets());
       } catch (error) {

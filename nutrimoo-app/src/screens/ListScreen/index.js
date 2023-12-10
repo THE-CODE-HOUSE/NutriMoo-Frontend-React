@@ -21,18 +21,20 @@ import { fetchAndStoreAnimals } from "../../services/animalService";
 
 const ListScreen = ({navigation,route}) => {
   const [data, setData] = useState([]);
+  //Recebe as informações das outras paginas para utilizar como filtro
   const {animalStage, animalGoal} = route.params;
 
   useEffect(() => {
     const fetchData = async () => {
       await fetchAndStoreAnimals();
-
+      //Pega todas as informações do storage
       setData(await AnimalStorage.getAnimals());
     };
 
     fetchData();
   }, []);
 
+  //Aqui os dados são filtrados
   const filteredData = data.filter(item => {
     const stageMatch = item.stage === animalStage;
     const goalMatch = item.goal === animalGoal;
@@ -43,6 +45,7 @@ const ListScreen = ({navigation,route}) => {
     navigation.navigate('AnimalInfo',{animalData});
   };
 
+  //Componentes da lista
   const renderItem = ({ item }) => {
 
     let cor1, cor2;

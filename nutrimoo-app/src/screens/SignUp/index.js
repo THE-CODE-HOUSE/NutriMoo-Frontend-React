@@ -99,7 +99,7 @@ const SignUpScreen = ({ navigation }) => {
       ToastAndroid.show("Usuário cadastrado com sucesso!", ToastAndroid.SHORT);
       navigation.navigate("Home");
     } catch (error) {
-      setErrorMessage("Erro ao fazer login. Por favor, tente novamente.");
+      setErrorMessage("Erro ao registrar. Por favor, tente novamente.");
     } finally {
     }
   };

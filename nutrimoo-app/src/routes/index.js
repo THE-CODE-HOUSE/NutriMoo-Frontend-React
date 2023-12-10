@@ -3,6 +3,7 @@ import { NavigationContainer } from "@react-navigation/native";
 
 import StackRoutes from "./stack.routes";
 
+//Aqui a navegação engloba o app
 export function Routes() {
   return (
     <NavigationContainer>

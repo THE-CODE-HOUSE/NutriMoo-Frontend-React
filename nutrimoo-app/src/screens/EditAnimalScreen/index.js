@@ -26,6 +26,7 @@ const EditAnimalScreen = ({navigation,route}) => {
   const [show, setShow] = useState(false);
   const [mode, setMode] = useState("date");
   const [errorMessage, setErrorMessage] = useState("");
+  //Recebe da da pagina anterior os dados do animal
   const {animalData} = route.params;
   
   const goBack = () => {

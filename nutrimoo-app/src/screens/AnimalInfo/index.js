@@ -20,13 +20,16 @@ import Toast from "react-native-root-toast";
 import { deleteAnimal } from "../../services/animalService";
 
 const AnimalInfo = ({ navigation, route }) => {
+  //Recebe da da pagina anterior os dados do animal
   const { animalData } = route.params;
 
   const openEditAnimal = () => {
+    //Envia os dados do animal para a proxima pagina
     navigation.navigate("EditAnimalScreen", { animalData });
   };
 
   const openAdvancedInfo = () => {
+    //Envia os dados do animal para a proxima pagina
     navigation.navigate("AdvancedInfo", { animalData });
   };
 

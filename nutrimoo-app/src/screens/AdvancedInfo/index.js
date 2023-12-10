@@ -23,6 +23,7 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 const AdvancedInfo = ({ navigation, route }) => {
   const [progress, setProgress] = useState(0.5);
+  //Recebe da da pagina anterior os dados do animal
   const { animalData } = route.params;
 
   const goBack = () => {
